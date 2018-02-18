@@ -11,5 +11,34 @@ Ideally apart of having abilit y to distribute data to different nodes, give it 
 ## Basic elements
 
 * **Quantum blockchain (QBC)** - this blockcahain 
-* **Quant** - block in quantum QBC
+* **Quant** - block in QBC
 * **Bang** - creation of new blockchain - genesis block.
+
+## QBC Node server
+
+Install dependencies from requirements.txt
+
+Start server by running
+
+```
+python server.py
+```
+
+### Routes available
+
+* **/quant** - [POST] add the data to blockchain
+* **/chain** - [GET] get whole chain in the node
+
+### To test server while running
+
+Using [httpie](https://httpie.org/) :
+
+Add block of data to blockchain:
+```
+http -v POST localhost:5000/quant this=is your="quant data"
+```
+
+Get blockchain in JSON format:
+```
+http -v GET localhost:5000/chain
+```
