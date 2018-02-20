@@ -21,6 +21,7 @@ Basic blockchain sever with ability to
 """
 local_qbc = [bang()]
 last_quant = local_qbc[0]
+live_nodes = []
 
 @node.route('/quant', methods=['POST'])
 def add_block():
@@ -45,4 +46,14 @@ def serve_qbc():
 		exported_qbc = json.dumps(exported_qbc)
 		return exported_qbc
 
-node.run()
+@node.route('/discover', methods=['POST', 'GET'])
+def register_node():
+	if request.method == 'GET':
+		return json.dumps(live_nodes)
+	if request.method == 'POST':
+		live_nodes.append(request.get_json()['host'])
+		return "SUCCESS!!!"
+
+
+
+node.run("localhost", 5000)

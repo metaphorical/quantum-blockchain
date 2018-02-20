@@ -8,6 +8,8 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 
 Ideally apart of having abilit y to distribute data to different nodes, give it ability to distribute blockchains across same nodes as well.
 
+I guess what would give value to idea of implementing it like this is that it would ideally be one service in your echosystem that has ability to provide you with blockchain database to server your needs for sequential immutable database(s).
+
 ## Basic elements
 
 * **Quantum blockchain (QBC)** - this blockcahain 
@@ -26,8 +28,13 @@ python server.py
 
 ### Routes available
 
-* **/quant** - [POST] add the data to blockchain
-* **/chain** - [GET] get whole chain in the node
+* **/quant** 
+  * [POST] add the data to blockchain
+* **/chain** 
+  * GET] get whole chain in the node
+* **/discover** 
+  * [POST] register one node on the system by sending it node host addres like host=address
+  * [GET] get currently up to da te list of nodes that are registered with this node
 
 ### To test server while running
 
