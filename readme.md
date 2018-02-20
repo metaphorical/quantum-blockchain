@@ -25,16 +25,17 @@ Start server by running
 ```
 python server.py
 ```
+**NOTE:** At this moment, for dev purposes, flask server will running in debug mode.
 
 ### Routes available
 
 * **/quant** 
   * [POST] add the data to blockchain
 * **/chain** 
-  * GET] get whole chain in the node
+  * [GET] get whole chain in the node
 * **/discover** 
   * [POST] register one node on the system by sending it node host addres like host=address
-  * [GET] get currently up to da te list of nodes that are registered with this node
+  * [GET] get currently up to date list of live nodes known to this node
 
 ### To test server while running
 

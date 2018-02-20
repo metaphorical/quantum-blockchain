@@ -56,4 +56,4 @@ def register_node():
 
 
 
-node.run("localhost", 5000)
+node.run(port=5000, debug=True)
