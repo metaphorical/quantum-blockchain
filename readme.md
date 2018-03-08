@@ -25,7 +25,7 @@ Start server by running
 ```
 python server.py
 ```
-**NOTE:** At this moment, for dev purposes, flask server will running in debug mode.
+**NOTE:** At this moment, for dev purposes, flask server will be running in debug mode.
 
 ### Routes available
 
