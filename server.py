@@ -1,7 +1,9 @@
 import json
 
-from flask import Flask
-from flask import request
+import sys
+
+from flask import Flask, request
+
 
 from modules.creation import bang, create_next_quant
 from modules.quant import Quant
@@ -56,4 +58,7 @@ def register_node():
 
 
 
-node.run(port=5000, debug=True)
+
+port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
+
+node.run(port=port, debug=True)
