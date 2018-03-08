@@ -4,6 +4,9 @@ import sys
 
 from flask import Flask, request
 
+from flask_socketio import SocketIO, emit
+
+
 
 from modules.creation import bang, create_next_quant
 from modules.quant import Quant
@@ -11,6 +14,7 @@ from modules.quant import Quant
 
 
 node = Flask(__name__)
+socketio = SocketIO(node)
 """
 Basic blockchain sever with ability to 
 
@@ -56,6 +60,15 @@ def register_node():
 		live_nodes.append(request.get_json()['host'])
 		return "SUCCESS!!!"
 
+
+
+@socketio.on('connect', namespace='/ptp')
+def test_connect():
+    emit('my response', {'data': 'Connected'})
+
+@socketio.on('disconnect', namespace='/ptp')
+def test_disconnect():
+    print('Client disconnected')
 
 
 
