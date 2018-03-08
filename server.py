@@ -24,16 +24,32 @@ Basic blockchain sever with ability to
 local_qbc = [bang()]
 last_quant = local_qbc[0]
 live_nodes = []
+waiting_transactions = []
 
-@node.route('/quant', methods=['POST'])
+@node.route('/inject', methods=['POST'])
+# Inject transaction (put in waiting queue)
+def add_transaction():
+	# add transaction to waiting list
+  	if request.method == 'POST':
+	  	waiting_transactions.append(request.get_json()['data'])
+		print "New transaction added"	
+		print "{}".format(request.get_json()['data'])
+		return "Transaction submission successful\n"
+
+@node.route('/leap', methods=['GET'])
+# Ad hoc mining - TODO: make this more configurable and automathic so POS and DPOS can be implemented
 def add_block():
-  if request.method == 'POST':
-		new_quant_data = request.get_json()
+  	if request.method == 'GET':
+	  	# Below is super simple, the idea is to have decision model on number of transactions and 
+		# also which transactions go in
+		global waiting_transactions
+		new_quant_data = waiting_transactions
+		waiting_transactions = []
 		new_quant = create_next_quant(last_quant, new_quant_data)
 		local_qbc.append(new_quant)
-		print "New block added"	
+		print "Quantum leap"	
 		print "{}".format(new_quant)
-		return "Submission successful\n"
+		return "block creation successful\n"
 
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
@@ -42,7 +58,8 @@ def serve_qbc():
 				"index": str(quant.index),
 				"timestamp": str(quant.timestamp),
 				"data": str(quant.data),
-				"hash": quant.hash
+				"hash": quant.hash,
+				"proof": str(quant.proof)
 				} for quant in local_qbc]
 				
 		exported_qbc = json.dumps(exported_qbc)

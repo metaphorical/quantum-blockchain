@@ -29,8 +29,10 @@ python server.py
 
 ### Routes available
 
-* **/quant** 
-  * [POST] add the data to blockchain
+* **/inject** 
+  * [POST] add transaction to transaction pool (transactions waiting ti be added to db)
+* **/leap** 
+  * [GET] add the data to blockchain - mine a block putting all the transactions in transaction pool in.
 * **/chain** 
   * [GET] get whole chain in the node
 * **/discover** 
@@ -41,9 +43,13 @@ python server.py
 
 Using [httpie](https://httpie.org/) :
 
+Add transaction to node (put on waiting list aka transaction pool):
+
+http -v POST localhost:5000/inject data="{\"test\":\"test2\"}"
+
 Add block of data to blockchain:
 ```
-http -v POST localhost:5000/quant this=is your="quant data"
+http -v GET localhost:5000/leap
 ```
 
 Get blockchain in JSON format:
