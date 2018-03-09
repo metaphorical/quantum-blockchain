@@ -15,6 +15,8 @@ I guess what would give value to idea of implementing it like this is that it wo
 * **Quantum blockchain (QBC)** - this blockcahain 
 * **Quant** - block in QBC
 * **Bang** - creation of new blockchain - genesis block.
+* **Transaction** - new data to be added to block
+* **Leap** - creating new Quant containing transactions from the pool
 
 ## QBC Node server
 
@@ -45,7 +47,9 @@ Using [httpie](https://httpie.org/) :
 
 Add transaction to node (put on waiting list aka transaction pool):
 
+```
 http -v POST localhost:5000/inject data="{\"test\":\"test2\"}"
+```
 
 Add block of data to blockchain:
 ```
