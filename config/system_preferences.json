@@ -1,3 +1,3 @@
 {
-    "genesis-node": "http://localhost:5000"
+    "genesis_nodes": ["http://localhost:5000"]
 }
