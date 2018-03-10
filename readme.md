@@ -4,11 +4,28 @@
 
 ## Idea (it will get analized in more depth in whitepaper)
 
-Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains.
+Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains. Build it as general purose solution that can be used as a service in multiservice system to provide blockchain functionality.
 
-Ideally apart of having abilit y to distribute data to different nodes, give it ability to distribute blockchains across same nodes as well.
+List of basic features
 
-I guess what would give value to idea of implementing it like this is that it would ideally be one service in your echosystem that has ability to provide you with blockchain database to server your needs for sequential immutable database(s).
+* Accept transactions
+* Create a block
+* Get full chain for comparison
+* [TODO] Get chain stats for comparison (POW)
+* [TODO] Basic node discovery and node registration on the network
+* [TODO] Basic bootstrap of the node
+* [TODO] Broadcast new block to all nodes
+* [TODO] Chack new block on all nodes (chain length check + all other checks)
+
+
+List of additional features:
+* [TODO] Multiple proof (consensus) systems
+* [TODO] Fork new blockchain
+* [TODO] Maintain multiple blockchains on network
+* [TODO] Strong validation system
+* [TODO] Zero knowledge proof access to data
+* [TODO] Other auth / data lock methods
+
 
 ## Basic elements
 
