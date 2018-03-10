@@ -16,6 +16,7 @@ List of basic features
 * [TODO] Basic bootstrap of the node
 * [TODO] Broadcast new block to all nodes
 * [TODO] Chack new block on all nodes (chain length check + all other checks)
+* [TODO] Persist blockchain on disc
 
 
 List of additional features:
