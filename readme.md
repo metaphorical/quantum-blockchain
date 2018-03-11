@@ -11,8 +11,9 @@ List of basic features
 * Accept transactions
 * Create a block
 * Get full chain for comparison
+* Basic node registration on the network
+* [TODO] Basic node discovery and distributed registration 
 * [TODO] Get chain stats for comparison (POW)
-* [TODO] Basic node discovery and node registration on the network
 * [TODO] Basic bootstrap of the node
 * [TODO] Broadcast new block to all nodes
 * [TODO] Chack new block on all nodes (chain length check + all other checks)
