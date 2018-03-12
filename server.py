@@ -1,10 +1,11 @@
-import json, sys, requests, socket
+import json, sys, requests
 
 from flask import Flask, request
 
 
 from modules.creation import bang, create_next_quant
 from modules.quant import Quant
+from modules.network import discover_network
 
 system_config = json.load(open('./config/system_preferences.json'))
 
@@ -72,33 +73,7 @@ def register_node():
 
 port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
 
-# registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
-# TODO: discover and register on new peers by getting data about peers registered on network
-# TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
-# TODO: review ip fetching, must be less hacky way
-if port != 5000:
-	node_ip = socket.gethostbyname(socket.gethostname())
-	this_node = "http://{}:{}".format(node_ip, port)
-	new_nodes = []
-	for qbc_node in live_nodes:
-		discover_payload = {'host': this_node}
-		register_request = requests.post("{}/discover".format(qbc_node), json=discover_payload)
-		print(register_request.text)
-		hosts_from_node = json.loads(register_request.text)
-		new_nodes += [x for x in hosts_from_node if (x != this_node and x not in live_nodes)]
-		print(json.dumps(new_nodes))
-		if(len(new_nodes) > 0):
-			live_nodes += new_nodes
-			for new_node in new_nodes:
-				if node_ip not in new_node:
-					node_addr = new_node
-				else:
-					node_addr = new_node.replace(node_ip, "localhost")
-				print(node_addr)
-				discover_payload = {'host': this_node}
-				register_request = requests.post("{}/discover".format(node_addr), json=discover_payload)
-				print(register_request.text)
-		else:
-			print("I guess this is second node on the network...")				
+# Discover full network and register on each of the nodes
+discover_network(port==5000,live_nodes=live_nodes, port=port)			
 
 node.run(port=port, debug=True)
