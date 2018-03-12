@@ -69,11 +69,9 @@ def register_node():
 		return json.dumps(live_nodes)
 
 
-
-
 port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
 
 # Discover full network and register on each of the nodes
-discover_network(port==5000,live_nodes=live_nodes, port=port)			
+live_nodes=discover_network(port==5000,live_nodes=live_nodes, port=port)			
 
 node.run(port=port, debug=True)
