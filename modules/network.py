@@ -1,6 +1,5 @@
 import socket, json, requests
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
-# TODO: discover and register on new peers by getting data about peers registered on network
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
 # TODO: review ip fetching, must be less hacky way
 
@@ -35,12 +34,12 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
 
             print("new nodes - {}".format(json.dumps(new_nodes)))
 
+            registered_nodes = registered_nodes + new_nodes
             if(len(new_nodes) > 0):
-                registered_nodes += new_nodes
                 print("registered nodes - {}".format(json.dumps(registered_nodes)))
                 for new_node in new_nodes:
-                    node_addr = parse_localhost(node_ip, new_node)
-                    json.loads(register_and_discover(node_addr, this_node).text)
+                    new_node_addr = parse_localhost(node_ip, new_node)
+                    register_and_discover(new_node_addr, this_node)
             else:
                 print("I guess this is second node on the network...")
     return registered_nodes
