@@ -11,8 +11,8 @@ def register_and_discover(node_addr, this_node):
 
 def parse_localhost(current_node_ip, new_node):
     """
-        for testing purposes, for node to communicate inside network, 
-        we need to parse all the IP addresses and replace current machine ones with locahost
+        for testing purposes, for node to communicate inside same machine, 
+        we need to parse all the IP addresses and replace current machine ones with localhost
     """
     if current_node_ip not in new_node:
         node_addr = new_node
@@ -20,7 +20,14 @@ def parse_localhost(current_node_ip, new_node):
         node_addr = new_node.replace(current_node_ip, "localhost")
     return node_addr
 
+
 def discover_network(genesis_node, live_nodes=[], port=5000):
+    """
+        Network discovery is done in two stages:
+        1 - ping genesys node (aka tracker) to register and get it's full list of nodes
+        2 - register on all of hte nodes
+        TODO: implement cross check and re register of nodes.
+    """
     registered_nodes = live_nodes
     new_nodes = []
     if not genesis_node:

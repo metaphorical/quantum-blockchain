@@ -2,10 +2,12 @@ import json, sys, requests
 
 from flask import Flask, request
 
+import hashlib as hasher
 
 from modules.creation import bang, create_next_quant
 from modules.quant import Quant
 from modules.network import discover_network
+from modules.qbc_utils import json_serialize_chain
 
 system_config = json.load(open('./config/system_preferences.json'))
 
@@ -45,16 +47,18 @@ def add_block():
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
 	if request.method == 'GET':
-		exported_qbc = [{
-				"index": str(quant.index),
-				"timestamp": str(quant.timestamp),
-				"data": str(quant.data),
-				"hash": quant.hash,
-				"proof": str(quant.proof)
-				} for quant in local_qbc]
-				
-		exported_qbc = json.dumps(exported_qbc)
-		return exported_qbc
+		return json_serialize_chain(local_qbc)
+
+@node.route('/stats', methods=['GET'])
+def chain_stats():
+	sha = hasher.sha256()
+	sha.update(json_serialize_chain(local_qbc))
+	if request.method == 'GET':
+		result = json.dumps({
+				"length": len(local_qbc),
+				"hash": sha.hexdigest()
+				})
+		return result
 
 @node.route('/discover', methods=['POST', 'GET'])
 def register_node():
