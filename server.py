@@ -8,6 +8,7 @@ from modules.creation import bang, create_next_quant
 from modules.quant import Quant
 from modules.network import discover_network
 from modules.qbc_utils import json_serialize_chain
+from modules.transactions import broadcast_transaction
 
 system_config = json.load(open('./config/system_preferences.json'))
 
@@ -18,8 +19,9 @@ local_qbc = [bang()]
 last_quant = local_qbc[0]
 live_nodes = system_config["genesis_nodes"]
 waiting_transactions = []
+port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
 
-@node.route('/inject', methods=['POST'])
+@node.route('/inject', methods=['POST', 'PUT'])
 # Inject transaction (put in waiting queue)
 def add_transaction():
 	# add transaction to waiting list
@@ -27,7 +29,15 @@ def add_transaction():
 	  	waiting_transactions.append(request.get_json()['data'])
 		print "New transaction added"	
 		print "{}".format(request.get_json()['data'])
+		broadcast_transaction(live_nodes, request.get_json()['data'], port)
 		return "Transaction submission successful\n"
+  	if request.method == 'PUT':
+	  	waiting_transactions.append(request.get_json()['data'])
+		print "New transaction added by the network"	
+		print "{}".format(request.get_json())
+		return "Transaction submission successful\n"
+		
+	
 
 @node.route('/leap', methods=['GET'])
 # Ad hoc mining - TODO: make this more configurable and automathic so POS and DPOS can be implemented
@@ -73,7 +83,6 @@ def register_node():
 		return json.dumps(live_nodes)
 
 
-port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
 
 # Discover full network and register on each of the nodes
 live_nodes=discover_network(port==5000,live_nodes=live_nodes, port=port)			

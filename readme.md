@@ -9,6 +9,7 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 List of basic features
 
 * Accept transactions
+* broadcast transactions to known nodes
 * Create a block
 * Get full chain for comparison
 * Basic node registration on the network
