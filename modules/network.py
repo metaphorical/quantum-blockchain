@@ -1,4 +1,6 @@
 import socket, json, requests
+
+from modules.qbc_utils import parse_localhost
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
 # TODO: review ip fetching, must be less hacky way
@@ -8,18 +10,6 @@ def register_and_discover(node_addr, this_node):
     register_request = requests.post("{}/discover".format(node_addr), json=discover_payload)
     print("register and discover - {}".format(register_request.text))
     return register_request
-
-def parse_localhost(new_node):
-    """
-        for testing purposes, for node to communicate inside same machine, 
-        we need to parse all the IP addresses and replace current machine ones with localhost
-    """
-    current_node_ip = socket.gethostbyname(socket.gethostname())
-    if current_node_ip not in new_node:
-        node_addr = new_node
-    else:
-        node_addr = new_node.replace(current_node_ip, "localhost")
-    return node_addr
 
 
 def discover_network(genesis_node, live_nodes=[], port=5000):

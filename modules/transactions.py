@@ -1,6 +1,6 @@
 import requests, json, socket
 
-from modules.network import parse_localhost
+from modules.qbc_utils import parse_localhost
 
 def broadcast_transaction(nodes, transaction, port):
     node_ip = socket.gethostbyname(socket.gethostname())

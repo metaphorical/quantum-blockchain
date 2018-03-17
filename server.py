@@ -31,7 +31,9 @@ def add_transaction():
 		print "{}".format(request.get_json()['data'])
 		broadcast_transaction(live_nodes, request.get_json()['data'], port)
 		return "Transaction submission successful\n"
+	# receive transaction from known node on the network
   	if request.method == 'PUT':
+		print "ip of caller - {}".format(request.remote_addr)
 	  	waiting_transactions.append(request.get_json()['data'])
 		print "New transaction added by the network"	
 		print "{}".format(request.get_json())
