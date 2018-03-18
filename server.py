@@ -33,8 +33,8 @@ def add_transaction():
 		return "Transaction submission successful\n"
 	# receive transaction from known node on the network
   	if request.method == 'PUT':
-		print "ip of caller - {}".format(request.remote_addr)
 	  	waiting_transactions.append(request.get_json()['data'])
+		print "ip of node sending transaction - {}".format(request.remote_addr)
 		print "New transaction added by the network"	
 		print "{}".format(request.get_json())
 		return "Transaction submission successful\n"

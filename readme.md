@@ -81,3 +81,9 @@ Get blockchain in JSON format:
 ```
 http -v GET localhost:5000/chain
 ```
+
+## Used third party dependencies
+
+* [Flask](http://flask.pocoo.org/docs/0.12/quickstart/)
+* [Requests](http://docs.python-requests.org/en/latest/user/quickstart/)
+
