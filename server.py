@@ -4,19 +4,16 @@ from flask import Flask, request
 
 import hashlib as hasher
 
-from modules.creation import bang, create_next_quant
-from modules.quant import Quant
+from modules.chain import Chain
 from modules.network import discover_network
 from modules.qbc_utils import json_serialize_chain
 from modules.transactions import broadcast_transaction
 
 system_config = json.load(open('./config/system_preferences.json'))
 
-
+QBC = Chain()
 node = Flask(__name__)
 
-local_qbc = [bang()]
-last_quant = local_qbc[0]
 live_nodes = system_config["genesis_nodes"]
 waiting_transactions = []
 port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
@@ -50,24 +47,23 @@ def add_block():
 		global waiting_transactions
 		new_quant_data = waiting_transactions
 		waiting_transactions = []
-		new_quant = create_next_quant(last_quant, new_quant_data)
-		local_qbc.append(new_quant)
+		QBC.create_quant(new_quant_data)
 		print "Quantum leap"	
-		print "{}".format(new_quant)
 		return "block creation successful\n"
 
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
 	if request.method == 'GET':
-		return json_serialize_chain(local_qbc)
+		return json_serialize_chain(QBC.get_chain())
 
 @node.route('/stats', methods=['GET'])
 def chain_stats():
+	# TODO get stats goes to chain
 	sha = hasher.sha256()
-	sha.update(json_serialize_chain(local_qbc))
+	sha.update(json_serialize_chain(QBC.get_chain()))
 	if request.method == 'GET':
 		result = json.dumps({
-				"length": len(local_qbc),
+				"length": len(QBC.get_chain()),
 				"hash": sha.hexdigest()
 				})
 		return result
