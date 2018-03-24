@@ -1,4 +1,6 @@
 import datetime as date
+import json
+
 from modules.quant import Quant
 
 class Chain:
@@ -33,3 +35,15 @@ class Chain:
 
     def get_chain(self):
         return self.qbc
+
+    def get_json_chain(self):
+        """
+            Getting json serialized QBC
+        """
+        return json.dumps([{
+                    "index": str(quant.index),
+                    "timestamp": str(quant.timestamp),
+                    "data": str(quant.data),
+                    "hash": quant.hash,
+                    "proof": str(quant.proof)
+                    } for quant in self.qbc])

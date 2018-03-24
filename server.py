@@ -6,7 +6,6 @@ import hashlib as hasher
 
 from modules.chain import Chain
 from modules.network import discover_network
-from modules.qbc_utils import json_serialize_chain
 from modules.transactions import broadcast_transaction
 
 system_config = json.load(open('./config/system_preferences.json'))
@@ -54,13 +53,13 @@ def add_block():
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
 	if request.method == 'GET':
-		return json_serialize_chain(QBC.get_chain())
+		return QBC.get_json_chain()
 
 @node.route('/stats', methods=['GET'])
 def chain_stats():
 	# TODO get stats goes to chain
 	sha = hasher.sha256()
-	sha.update(json_serialize_chain(QBC.get_chain()))
+	sha.update(QBC.get_json_chain())
 	if request.method == 'GET':
 		result = json.dumps({
 				"length": len(QBC.get_chain()),
