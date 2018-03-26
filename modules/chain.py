@@ -1,5 +1,5 @@
 import datetime as date
-import json
+import json, pickle, os
 
 from modules.quant import Quant
 
@@ -32,6 +32,7 @@ class Chain:
         """
         self.qbc.append(Chain.__create_next_quant(self.current_quant, data))
         self.current_quant = self.qbc[len(self.qbc) - 1]
+        Chain.write_qbc_to_disc(self)
 
     def get_chain(self):
         return self.qbc
@@ -47,3 +48,10 @@ class Chain:
                     "hash": quant.hash,
                     "proof": str(quant.proof)
                     } for quant in self.qbc])
+    def write_qbc_to_disc(self):
+        """
+            Storing QBC on disc serualized using pickle
+            TODO: introduce encryption
+        """
+        with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'wb') as fp:
+            pickle.dump(self.qbc, fp)
