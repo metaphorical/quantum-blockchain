@@ -8,8 +8,15 @@ class Chain:
     QBC structure implementation
     """
     def __init__(self):
-        self.qbc = [Chain.__bang()]
+        # If there is locally storred chain it should be read and used on init 
+        # (instead of basic initiation of genesis block)
+        if(os.path.exists(os.path.join(os.getcwd(),'storage', 'q.bc'))):
+            self.qbc = Chain.__read_chain_from_disc()
+        else:
+            self.qbc = [Chain.__bang()]
         self.current_quant = self.qbc[0]
+        Chain.__read_chain_from_disc()
+
     @classmethod
     def __bang(self):
         """Bang starts new blockchain creating what is known as 'genesis block'"""
@@ -25,6 +32,12 @@ class Chain:
         last_hash = last_quant.hash
         last_proof = last_quant.proof
         return Quant(this_index, this_timestamp, this_data, last_hash, last_proof)
+    @classmethod
+    def __read_chain_from_disc(self):
+        with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'rb') as qbc_file:
+            return pickle.load(qbc_file)
+
+
     
     def create_quant(self, data):
         """
