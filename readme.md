@@ -15,11 +15,11 @@ List of basic features
 * Basic node registration on the network
 * Basic node discovery and distributed registration 
 * Get chain stats
+* Persist blockchain on disc
+* [TODO] Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain
 * [TODO] Get chain stats for comparison (configurable/parametrized) (POW)
-* [TODO] Basic bootstrap of the node
 * [TODO] Broadcast new block to all nodes
 * [TODO] Check new block on all nodes (chain length check + all other checks)
-* [TODO] Persist blockchain on disc
 
 
 List of additional features:
