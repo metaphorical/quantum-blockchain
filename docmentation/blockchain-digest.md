@@ -27,6 +27,8 @@ Altho I am building this list to promote thinking about general purpose block ch
 
 ## The systems - How do we want to use blockchain.
 
+### Government and insurance
+
 * [Insurance - reinsurance 1](https://www.allianz.com/en/press/news/commitment/sponsorship/161018-insurers-and-reinsurers-launch-blockchain-initiative-b3i/)
 * [Insurance - reinsurance 2](https://www.allianz.com/en/press/news/commitment/sponsorship/170206_Blockchain-gains--international-scope/)
 * [Insurance - reinsurance 3](http://www.agcs.allianz.com/about-us/news/blockchain-technology-successfully-piloted-by-allianz-risk-transfer-and-nephila-for-catastrophe-swap-/)
@@ -35,38 +37,30 @@ Altho I am building this list to promote thinking about general purpose block ch
 * [Dubai blockchain government 2](https://www.coindesk.com/dubai-land-department-launches-blockchain-real-estate-initiative/)
 
 
+### Food
 
-Food:
+* [The Conversation - How blockchain could revolutionarize food industry](http://theconversation.com/how-blockchain-technology-could-transform-the-food-industry-89348)
 
-http://theconversation.com/how-blockchain-technology-could-transform-the-food-industry-89348
+* [Forbes - The blockchain of food](https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/themixingbowl/2017/10/23/the-blockchain-of-food/)
 
-https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/themixingbowl/2017/10/23/the-blockchain-of-food/
+* [IBM - Blockchain in food safety](https://www.ibm.com/blogs/blockchain/category/blockchain-in-food-safety/)
 
-https://www.ibm.com/blogs/blockchain/category/blockchain-in-food-safety/
-
-https://www.bloomberg.com/news/articles/2017-12-07/blockchain-seen-revolutionizing-food-chain-cutting-costs
+* [Bloomberg - blockchain seen revolutionarizing food chain cutting cost](https://www.bloomberg.com/news/articles/2017-12-07/blockchain-seen-revolutionizing-food-chain-cutting-costs)
 
 
-Applications, solutions etc
+### Misc applications, solutions etc
 
-Decentralized apps - not only blockchain (noblockchain?)
-IPFS (inter planetary fs) - https://ipfs.io/
+#### Decentralized apps - not only blockchain (noblockchain?)
 
-Email - http://labs.devana.rs/project/lemon-email/
-
-Decentralized org structures - https://aragon.one/
-
-Decentralized forecasting - http://www.augur.net/
-
-Data science network - https://numer.ai/
-
-Social engagement whatever :D - https://akasha.world/
-
-Media - https://steem.io/#intro-ex
-
-Professional network - https://indorse.io/
-
-Golem - https://golem.network/
+* [IPFS (inter planetary fs)](https://ipfs.io/)
+* [Email](http://labs.devana.rs/project/lemon-email/)
+* [Decentralized org structures](https://aragon.one/)
+* [Decentralized forecasting](http://www.augur.net/)
+* [Data science network](https://numer.ai/)
+* [Social engagement whatever](https://akasha.world/)
+* [Media](https://steem.io/#intro-ex)
+* [Professional network](https://indorse.io/)
+* [Golem](https://golem.network/)
 
 Green:
 http://www.genercoin.org/
