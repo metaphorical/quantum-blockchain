@@ -62,30 +62,27 @@ Altho I am building this list to promote thinking about general purpose block ch
 * [Professional network](https://indorse.io/)
 * [Golem](https://golem.network/)
 
-Green:
-http://www.genercoin.org/
-http://renucoin.com/
-https://kwhcoin.com/
+#### Green
 
+* [http://www.genercoin.org/](http://www.genercoin.org/)
+* [http://renucoin.com/](http://renucoin.com/)
+* [https://kwhcoin.com/](https://kwhcoin.com/)
 
-https://basicattentiontoken.org/ 
+### Other
 
-Enterprise:
+* [Basic attention token](https://basicattentiontoken.org/) 
 
-https://www.hyperledger.org/
+### Enterprise
 
-https://www.ibm.com/blockchain/
+* [https://www.hyperledger.org/](https://www.hyperledger.org/)
+* [https://www.ibm.com/blockchain/](https://www.ibm.com/blockchain/)
+* [https://www.blockchain.com/enterprise/index.html](https://www.blockchain.com/enterprise/index.html)
 
-https://www.blockchain.com/enterprise/index.html
-
-Moneyz
-https://z.cash/
-
-https://litecoin.org/
-
-https://getmonero.org/
-
-https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/panosmourdoukoutas/2018/01/31/bitcoin-ripple-and-litecoin-sell-off-whats-different-this-time-around
+### Moneyz
+* [ZCash](https://z.cash/)
+* [Litecoin](https://litecoin.org/)
+* [Monero](https://getmonero.org/)
+* [Forbes on bitcoin, ripple, litecoin in Jan 2018](https://www.forbes.com/forbes/welcome/?toURL=https://www.forbes.com/sites/panosmourdoukoutas/2018/01/31/bitcoin-ripple-and-litecoin-sell-off-whats-different-this-time-around)
 
 
 
