@@ -6,7 +6,12 @@
 
 Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains. Build it as general purose solution that can be used as a service in multiservice system to provide blockchain functionality.
 
-List of basic features
+## Documentation
+
+* [Whitepaper](documentation/whitepaper.md)
+* [Blockchain Digest](documentation/blockchain-digest.md)
+
+### List of basic features
 
 * Accept transactions
 * broadcast transactions to known nodes
