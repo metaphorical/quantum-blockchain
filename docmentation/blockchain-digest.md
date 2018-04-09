@@ -87,35 +87,23 @@ Altho I am building this list to promote thinking about general purpose block ch
 
 
 
-The big heists
-YEAH, heists
-https://www.cryptocompare.com/coins/guides/the-dao-the-hack-the-soft-fork-and-the-hard-fork/
-https://www.coindesk.com/understanding-dao-hack-journalists/
-
-https://medium.freecodecamp.org/a-hacker-stole-31m-of-ether-how-it-happened-and-what-it-means-for-ethereum-9e5dc29e33ce
-
-http://money.cnn.com/2018/01/29/technology/coincheck-cryptocurrency-exchange-hack-japan/index.html
-
-https://www.ft.com/content/8c694e3a-04c5-11e8-9650-9c0ad2d7c5b5
-
-http://fortune.com/2017/11/08/ethereum-parity-hack-hard-fork/
-
-https://www.bloomberg.com/features/2017-the-ether-thief/
+## The big heists
+#### YEAH, heists
+* [DAO 1](https://www.cryptocompare.com/coins/guides/the-dao-the-hack-the-soft-fork-and-the-hard-fork/)
+* [DAO 2](https://www.coindesk.com/understanding-dao-hack-journalists/)
+* [31M of Ether](https://medium.freecodecamp.org/a-hacker-stole-31m-of-ether-how-it-happened-and-what-it-means-for-ethereum-9e5dc29e33ce)
+* [Coincheck](http://money.cnn.com/2018/01/29/technology/coincheck-cryptocurrency-exchange-hack-japan/index.html)
+* [Ethereum parity hard fork](http://fortune.com/2017/11/08/ethereum-parity-hack-hard-fork/)
+* [The ether thief](https://www.bloomberg.com/features/2017-the-ether-thief/)
 
 
-Further reads
+## Further reads
 
-https://medium.com/crypto-currently
-
-https://www.ethereum.org/token
-
-https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format
-
-Ethereum DAO - https://www.ethereum.org/dao
-
-https://blog.indorse.io/why-we-are-building-a-decentralized-professional-network-indorse-8905d831f55a
-
-https://news.earn.com/quantifying-decentralization-e39db233c28e
-
-Blockchain based digital advertizing - BAT token ( look at BRAVE browser as well) - https://basicattentiontoken.org/BasicAttentionTokenWhitePaper-4.pdf
+* [Crypto currently](https://medium.com/crypto-currently)
+* [Ethereum tokens](https://www.ethereum.org/token)
+* [Ethereum natural spec format](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)
+* [Ethereum DAO](https://www.ethereum.org/dao)
+* [Indorse - decentralized professional network]( https://blog.indorse.io/why-we-are-building-a-decentralized-professional-network-indorse-8905d831f55a)
+* [quntifying decentralization](https://news.earn.com/quantifying-decentralization-e39db233c28e)
+* [Blockchain based digital advertizing - BAT token ( look at BRAVE browser as well](https://basicattentiontoken.org/BasicAttentionTokenWhitePaper-4.pdf)
 
