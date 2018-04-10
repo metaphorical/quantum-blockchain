@@ -4,11 +4,9 @@ Blockchain solution for everyday multi service application.
 
 ## Purpose
 
-It started as a purely academic experiment, and it is still considered exactly that.
+Main purpose of QBC is to be as generelly useful to anyone wanting to remove single point of failure and strengten data security by having decentralized and secure database. Idealy, this solution should reduce throughput of the system as little as possible.
 
-Main prpose of QBC is to be as generelly useful to anyone needing blockchain to strengten data security but provide possibility of reducing throughput of the system as little as possible.
-
-Built with integration and decoupling possibilities in mind, with idea to provide nice APIs and multi variant configurable solution. 
+QBC is built with integration and decoupling possibilities in mind, with idea to provide nice APIs and multi variant configurable solution. 
 
 ## What is general purpose blockchain
 
@@ -26,4 +24,19 @@ Obviously, if we are building something to be generally used as a suplement to a
 * Easy to deploy
 * Highly configurable (it should adopt to needs of a system, not vice versa)
 * Integration into the system should be super simple (e.g. you deploy and configure it and after that it all goes through simple RESTful API)
+
+### It should have multiple consensus algorythms
+
+Consensus algorythms (AKA proof systems) are important for blockchain to function properly. They ensure proper work distribution, provide security to data storage, and are responsible for data integrity. 
+
+General purpose blockchain should provide set of initial, selectable methods to find consensus. 
+
+**I suggest following set of algorythms**
+
+* **PBFT** - Practical Byzantine Fault Tolerance algorithm
+* **PoW** - Proof-of-work algorithm
+* **Pos** - Proof-of-stake algorithm
+* **DPoS** - Delegated proof-of-stake algorithm
+
+It should additionally provide a way to write and use new algorythm.
 

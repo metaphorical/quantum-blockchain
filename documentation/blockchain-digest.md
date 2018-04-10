@@ -15,6 +15,7 @@ Altho I am building this list to promote thinking about general purpose block ch
 ## Details
 
 * [Byzantine what? Here is little more detail on how to fight challenges and embrace adventages decentralization brings:](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe)
+* [Consensus in blockchain system in short](https://medium.com/@chrshmmmr/consensus-in-blockchain-systems-in-short-691fc7d1fefe)
 * [Other one:](https://www.coindesk.com/short-guide-blockchain-consensus-protocols/)
 * [Ofc, for academically inclined:](https://scholar.google.com/scholar?q=practical+byzantine+fault+tolerance+algorithm&hl=en&as_sdt=0&as_vis=1&oi=scholart&sa=X&ved=0ahUKEwjS94qlxsPVAhWEshQKHWX6C0UQgQMIJDAA)
 * [Especially:](http://pmg.csail.mit.edu/papers/osdi99.pdf)
