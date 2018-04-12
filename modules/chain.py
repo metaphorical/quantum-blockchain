@@ -15,7 +15,6 @@ class Chain:
         else:
             self.qbc = [Chain.__bang()]
         self.current_quant = self.qbc[0]
-        Chain.__read_chain_from_disc()
 
     @classmethod
     def __bang(self):
