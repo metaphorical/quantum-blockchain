@@ -69,7 +69,10 @@ def register_node():
 		new_host = request.get_json()['host']
 		if not (new_host in live_nodes):
 			live_nodes.append(new_host)
-		return json.dumps(live_nodes)
+		return json.dumps({
+				"live_nodes": live_nodes,
+				"stats": QBC.get_chain_stats()
+			})
 
 
 
