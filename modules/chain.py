@@ -1,5 +1,6 @@
 import datetime as date
 import json, pickle, os
+import hashlib as hasher
 
 from modules.quant import Quant
 
@@ -36,6 +37,13 @@ class Chain:
         with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'rb') as qbc_file:
             return pickle.load(qbc_file)
 
+    def get_chain_stats(self):
+        sha = hasher.sha256()
+        sha.update(self.get_json_chain())
+        return json.dumps({
+                "length": len(self.get_chain()),
+                "hash": sha.hexdigest()
+                })
 
     
     def create_quant(self, data):

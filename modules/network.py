@@ -16,7 +16,7 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
     """
         Network discovery is done in two stages:
         1 - ping genesys node (aka tracker) to register and get it's full list of nodes
-        2 - register on all of hte nodes
+        2 - register on all of the nodes
         TODO: implement cross check and re register of nodes.
     """
     registered_nodes = live_nodes

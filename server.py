@@ -57,15 +57,7 @@ def serve_qbc():
 
 @node.route('/stats', methods=['GET'])
 def chain_stats():
-	# TODO get stats goes to chain
-	sha = hasher.sha256()
-	sha.update(QBC.get_json_chain())
-	if request.method == 'GET':
-		result = json.dumps({
-				"length": len(QBC.get_chain()),
-				"hash": sha.hexdigest()
-				})
-		return result
+		return QBC.get_chain_stats()
 
 @node.route('/discover', methods=['POST', 'GET'])
 def register_node():
