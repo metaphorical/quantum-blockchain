@@ -21,11 +21,19 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
     """
     registered_nodes = live_nodes
     new_nodes = []
+    max_length = 0
+    max_length_node = ""
     if not genesis_node:
         node_ip = socket.gethostbyname(socket.gethostname())
         this_node = "http://{}:{}".format(node_ip, port)
         for qbc_node in registered_nodes:
             node_addr = parse_localhost(qbc_node)
+            # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var
+            node_chain_length = json.loads(register_and_discover(node_addr, this_node).text)["stats"]["length"]
+            if(node_chain_length > max_length):
+                max_length = node_chain_length
+                max_length_node = node_addr
+            # Getting live nodes and figuring out new ones
             hosts_from_node = json.loads(register_and_discover(node_addr, this_node).text)["live_nodes"]
 
             new_nodes += [x for x in hosts_from_node if (x != this_node and x not in registered_nodes)]
@@ -40,4 +48,8 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
                     register_and_discover(new_node_addr, this_node)
             else:
                 print("I guess this is second node on the network...")
-    return registered_nodes
+    return {
+        "registered_nodes": registered_nodes,
+        "longest_chain_length": max_length,
+        "longest_chain_node": max_length_node
+    }

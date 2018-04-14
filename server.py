@@ -71,12 +71,12 @@ def register_node():
 			live_nodes.append(new_host)
 		return json.dumps({
 				"live_nodes": live_nodes,
-				"stats": QBC.get_chain_stats()
+				"stats": json.loads(QBC.get_chain_stats())
 			})
 
 
 
 # Discover full network and register on each of the nodes
-live_nodes=discover_network(port==5000,live_nodes=live_nodes, port=port)			
+live_nodes=discover_network(port==5000,live_nodes=live_nodes, port=port)["registered_nodes"]			
 
 node.run(port=port, debug=True)

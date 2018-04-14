@@ -22,9 +22,10 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 * Get chain stats
 * Persist blockchain on disc
 * [TODO] Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain
-* [TODO] Make chain stats for comparison (configurable/parametrized) (POW)
 * [TODO] Broadcast new block to all nodes
 * [TODO] Check new block on all nodes (chain length check + all other checks)
+* [TODO] Make chain stats for comparison (configurable/parametrized) (POW)
+* [TODO] Network auth system
 
 
 List of additional features:
