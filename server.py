@@ -53,7 +53,7 @@ def add_block():
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
 	if request.method == 'GET':
-		return QBC.get_json_chain()
+		return QBC.get_chain("json")
 
 @node.route('/stats', methods=['GET'])
 def chain_stats():
@@ -74,9 +74,11 @@ def register_node():
 				"stats": json.loads(QBC.get_chain_stats())
 			})
 
-
-
 # Discover full network and register on each of the nodes
-live_nodes=discover_network(port==5000,live_nodes=live_nodes, port=port)["registered_nodes"]			
+network=discover_network(port==5000,live_nodes=live_nodes, port=port)
+live_nodes=network["registered_nodes"]
+if json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+	QBC.get_remote_node_chain(network["longest_chain_node"])
+
 
 node.run(port=port, debug=True)

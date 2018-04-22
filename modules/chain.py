@@ -3,6 +3,7 @@ import json, pickle, os
 import hashlib as hasher
 
 from modules.quant import Quant
+from modules.network import read_chain
 
 class Chain:
     """
@@ -39,12 +40,11 @@ class Chain:
 
     def get_chain_stats(self):
         sha = hasher.sha256()
-        sha.update(self.get_json_chain())
+        sha.update(self.get_chain("json"))
         return json.dumps({
                 "length": len(self.get_chain()),
                 "hash": sha.hexdigest()
                 })
-
     
     def create_quant(self, data):
         """
@@ -54,20 +54,18 @@ class Chain:
         self.current_quant = self.qbc[len(self.qbc) - 1]
         Chain.write_qbc_to_disc(self)
 
-    def get_chain(self):
-        return self.qbc
+    def get_chain(self, format="default"):
+        return {
+            "json": json.dumps([{
+                        "index": str(quant.index),
+                        "timestamp": str(quant.timestamp),
+                        "data": str(quant.data),
+                        "hash": quant.hash,
+                        "proof": str(quant.proof)
+                        } for quant in self.qbc]),
+            "serialized": pickle.dumps(self.qbc)
+        }.get(format, self.qbc)
 
-    def get_json_chain(self):
-        """
-            Getting json serialized QBC
-        """
-        return json.dumps([{
-                    "index": str(quant.index),
-                    "timestamp": str(quant.timestamp),
-                    "data": str(quant.data),
-                    "hash": quant.hash,
-                    "proof": str(quant.proof)
-                    } for quant in self.qbc])
     def write_qbc_to_disc(self):
         """
             Storing QBC on disc serualized using pickle
@@ -75,3 +73,15 @@ class Chain:
         """
         with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'wb') as fp:
             pickle.dump(self.qbc, fp)
+
+    def get_remote_node_chain(self, host):
+        """
+            TODO: Here, it should be 
+            ```
+                self.qbc = pickle.loads(read_chain(host))
+            ```
+            but in order to develop and test I need to first finish dockerizing
+            and preset for 2 or 3 node testing setup to emulate different lengths 
+            and chain diverging events.
+        """
+        read_chain(host)

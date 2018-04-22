@@ -11,6 +11,17 @@ def register_and_discover(node_addr, this_node):
     print("register and discover - {}".format(register_request.text))
     return register_request
 
+def read_chain(node):
+    """
+        TODO: read from the special route that outputs pickeld chain.
+        TODO: create special route that outputs pickeld chain
+        TODO: this might probably grow to be first secure transfer point, so when working on 
+        node to node auth, include it here
+    """
+    print("==================================")
+    print("READING CHAIN FROM {}".format(node))
+
+
 
 def discover_network(genesis_node, live_nodes=[], port=5000):
     """
