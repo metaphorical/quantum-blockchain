@@ -21,7 +21,7 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 * Basic node discovery and distributed registration 
 * Get chain stats
 * Persist blockchain on disc
-* [TODO] Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain
+* Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain, or keeping current if longest or same length
 * [TODO] Broadcast new block to all nodes
 * [TODO] Check new block on all nodes (chain length check + all other checks)
 * [TODO] Make chain stats for comparison (configurable/parametrized) (POW)
@@ -62,8 +62,10 @@ python server.py
   * [POST] add transaction to transaction pool (transactions waiting ti be added to db)
 * **/leap** 
   * [GET] add the data to blockchain - mine a block putting all the transactions in transaction pool in.
+* **/json-chain** 
+  * [GET] get whole chain in the node in JSON format
 * **/chain** 
-  * [GET] get whole chain in the node
+  * [GET] get whole chain in the node serialized in pickle
 * **/discover** 
   * [POST] register one node on the system by sending it node host addres like host=address
   * [GET] get currently up to date list of live nodes known to this node

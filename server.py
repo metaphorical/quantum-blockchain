@@ -50,10 +50,15 @@ def add_block():
 		print "Quantum leap"	
 		return "block creation successful\n"
 
+@node.route('/json-chain', methods=['GET'])
+def serve_json_qbc():
+	if request.method == 'GET':
+		return QBC.get_chain("json")
+
 @node.route('/chain', methods=['GET'])
 def serve_qbc():
 	if request.method == 'GET':
-		return QBC.get_chain("json")
+		return QBC.get_chain("serialized")
 
 @node.route('/stats', methods=['GET'])
 def chain_stats():
@@ -74,10 +79,12 @@ def register_node():
 				"stats": json.loads(QBC.get_chain_stats())
 			})
 
+# TODO: make deterining genesis node proper - currently, first node is detected by looking at port (if it is 5000 it is base node)
 # Discover full network and register on each of the nodes
 network=discover_network(port==5000,live_nodes=live_nodes, port=port)
 live_nodes=network["registered_nodes"]
-if json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+
+if port!=5000 and json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
 	QBC.get_remote_node_chain(network["longest_chain_node"])
 
 

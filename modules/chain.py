@@ -76,12 +76,11 @@ class Chain:
 
     def get_remote_node_chain(self, host):
         """
-            TODO: Here, it should be 
-            ```
-                self.qbc = pickle.loads(read_chain(host))
-            ```
-            but in order to develop and test I need to first finish dockerizing
+            Downloads chain in bickle format and sets it into qbc
+            
+            TODO: In order to develop and test I need to first finish dockerizing
             and preset for 2 or 3 node testing setup to emulate different lengths 
             and chain diverging events.
         """
-        read_chain(host)
+        remote_chain = read_chain(host)
+        self.qbc = pickle.loads(remote_chain)

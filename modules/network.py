@@ -11,15 +11,13 @@ def register_and_discover(node_addr, this_node):
     print("register and discover - {}".format(register_request.text))
     return register_request
 
-def read_chain(node):
+def read_chain(node_addr):
     """
-        TODO: read from the special route that outputs pickeld chain.
-        TODO: create special route that outputs pickeld chain
         TODO: this might probably grow to be first secure transfer point, so when working on 
         node to node auth, include it here
     """
-    print("==================================")
-    print("READING CHAIN FROM {}".format(node))
+    chain_request = requests.get("{}/chain".format(node_addr))
+    return chain_request.text
 
 
 
