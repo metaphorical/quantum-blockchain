@@ -46,13 +46,17 @@ docker run -it -p 5000:5000 qbc
 * [TODO] Network auth system
 
 
-List of additional features:
+### List of additional features:
 * [TODO] Multiple proof (consensus) systems
 * [TODO] Fork new blockchain
 * [TODO] Maintain multiple blockchains on network
 * [TODO] Strong validation system
 * [TODO] Zero knowledge proof access to data
 * [TODO] Other auth / data lock methods
+
+### Support features
+* [TODO] Admin UI 
+* [TODO] Analytics dashboard
 
 
 ## Basic elements

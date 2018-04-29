@@ -1,4 +1,4 @@
-# Quantum blockchain (QBC)
+# Quantum blockchain (QBC) whitepaper - v 0.1 [WIP]
 
 Blockchain solution for everyday multi service application. 
 
@@ -40,3 +40,16 @@ General purpose blockchain should provide set of initial, selectable methods to 
 
 It should additionally provide a way to write and use new algorythm.
 
+### It should be easily deployable
+
+[...]
+
+### It should have some kind of admin UI
+
+#### Basic administration
+
+[...]
+
+#### Basic analytics dashboard
+
+[...]
