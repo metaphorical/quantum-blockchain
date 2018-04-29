@@ -6,6 +6,24 @@
 
 Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains. Build it as general purose solution that can be used as a service in multiservice system to provide blockchain functionality.
 
+## QBC Node server
+
+> **NOTE:** At this moment, for dev purposes, flask server will be running in debug mode.
+
+### Running for local development
+Install dependencies from requirements.txt
+
+Start server by running
+
+```
+python server.py
+```
+### Running it using Docker - basic
+```
+docker build -t qbc .
+docker run -it -p 5000:5000 qbc
+```
+
 ## Documentation
 
 * [Whitepaper](documentation/whitepaper.md)
@@ -44,17 +62,6 @@ List of additional features:
 * **Bang** - creation of new blockchain - genesis block.
 * **Transaction** - new data to be added to block
 * **Leap** - creating new Quant containing transactions from the pool
-
-## QBC Node server
-
-Install dependencies from requirements.txt
-
-Start server by running
-
-```
-python server.py
-```
-**NOTE:** At this moment, for dev purposes, flask server will be running in debug mode.
 
 ### Routes available
 

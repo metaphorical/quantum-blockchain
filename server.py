@@ -88,4 +88,4 @@ if port!=5000 and json.loads(QBC.get_chain_stats())["length"] < network["longest
 	QBC.get_remote_node_chain(network["longest_chain_node"])
 
 
-node.run(port=port, debug=True)
+node.run(host='0.0.0.0', port=port, debug=True)
