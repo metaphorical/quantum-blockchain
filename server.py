@@ -1,4 +1,4 @@
-import json, sys, requests
+import json, sys, requests, pickle
 
 from flask import Flask, request
 
@@ -18,7 +18,7 @@ waiting_transactions = []
 port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
 
 @node.route('/inject', methods=['POST', 'PUT'])
-# Inject transaction (put in waiting queue)
+# Route to inject transaction (put in waiting queue)
 def add_transaction():
 	# add transaction to waiting list
   	if request.method == 'POST':
@@ -38,35 +38,50 @@ def add_transaction():
 	
 
 @node.route('/leap', methods=['GET'])
-# Ad hoc mining - TODO: make this more configurable and automathic so POS and DPOS can be implemented
-def add_block():
+# Route to trigger ad hoc mining
+# TODO: make mining configurable and automathic so POS and DPOS can be implemented
+def generate_block():
   	if request.method == 'GET':
 	  	# Below is super simple, the idea is to have decision model on number of transactions and 
 		# also which transactions go in
 		global waiting_transactions
 		new_quant_data = waiting_transactions
 		waiting_transactions = []
-		QBC.create_quant(new_quant_data)
+		new_block = QBC.create_quant(new_quant_data)
+		#TODO: use network.broadcast_quant here
 		print "Quantum leap"	
 		return "block creation successful\n"
 
 @node.route('/json-chain', methods=['GET'])
+# Route to get chain in JSON format
 def serve_json_qbc():
 	if request.method == 'GET':
 		return QBC.get_chain("json")
 
 @node.route('/chain', methods=['GET'])
+# Route to get chain in Pickel format
 def serve_qbc():
 	if request.method == 'GET':
 		return QBC.get_chain("serialized")
 
 @node.route('/stats', methods=['GET'])
+# Route to get Node stats
 def chain_stats():
 		return QBC.get_chain_stats()
 
+@node.route('/add-block', methods=['POST'])
+# Route to simply submit new, just mined block to this node
+def add_block():
+		if request.method == 'POST':
+			new_quant_pickle = request.get_json()['quant']
+			new_quant = pickle.loads(new_quant_pickle)
+			QBC.add_quant(new_quant)
+			# TODO: better detection if it succided
+			return "Success"
+
 @node.route('/discover', methods=['POST', 'GET'])
+# Register new node if not already registered
 def register_node():
-	#Register new node if not already registered
 	global live_nodes
 	if request.method == 'GET':
 		return json.dumps(live_nodes)
@@ -79,7 +94,7 @@ def register_node():
 				"stats": json.loads(QBC.get_chain_stats())
 			})
 
-# TODO: make deterining genesis node proper - currently, first node is detected by looking at port (if it is 5000 it is base node)
+# TODO: make deteriming genesis node proper - currently, first node is detected by looking at port (if it is 5000 it is base node)
 # Discover full network and register on each of the nodes
 network=discover_network(port==5000,live_nodes=live_nodes, port=port)
 live_nodes=network["registered_nodes"]

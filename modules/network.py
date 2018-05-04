@@ -1,4 +1,4 @@
-import socket, json, requests
+import socket, json, requests, pickle
 
 from modules.qbc_utils import parse_localhost
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
@@ -19,6 +19,16 @@ def read_chain(node_addr):
     chain_request = requests.get("{}/chain".format(node_addr))
     return chain_request.text
 
+def broadcast_quant(nodes, quant):
+    """
+        Broadcast any quant to all nodes in provided list
+        TODO: secure this process
+    """
+    for qbc_node in nodes:
+        node_addr = parse_localhost(qbc_node)
+        quant_payload = {'quant': pickle.dumps(quant)}
+        request = requests.post("{}/add-block".format(node_addr), json=quant_payload)
+        print("Broadcasted new block to {} - {}".format(node_addr, request.text))
 
 
 def discover_network(genesis_node, live_nodes=[], port=5000):

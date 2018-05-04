@@ -50,7 +50,17 @@ class Chain:
         """
             Public method to add new quatn to QBC
         """
-        self.qbc.append(Chain.__create_next_quant(self.current_quant, data))
+        new_quant = Chain.__create_next_quant(self.current_quant, data)
+        self.qbc.append(new_quant)
+        self.current_quant = self.qbc[len(self.qbc) - 1]
+        Chain.write_qbc_to_disc(self)
+        return new_quant
+    
+    def add_quant(self, quant):
+        """
+            Add Quant to QBC
+        """
+        self.qbc.append(quant)
         self.current_quant = self.qbc[len(self.qbc) - 1]
         Chain.write_qbc_to_disc(self)
 
