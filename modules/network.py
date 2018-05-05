@@ -4,6 +4,9 @@ from modules.qbc_utils import parse_localhost
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
 # TODO: review ip fetching, must be less hacky way
+def get_this_node(port=5000):
+    node_ip = socket.gethostbyname(socket.gethostname())
+    return "http://{}:{}".format(node_ip, port)
 
 def register_and_discover(node_addr, this_node):
     discover_payload = {'host': this_node}
@@ -19,16 +22,19 @@ def read_chain(node_addr):
     chain_request = requests.get("{}/chain".format(node_addr))
     return chain_request.text
 
-def broadcast_quant(nodes, quant):
+def broadcast_quant(nodes, quant, this_node_port=5000):
     """
         Broadcast any quant to all nodes in provided list
         TODO: secure this process
     """
+    this_node = parse_localhost(get_this_node(this_node_port))
     for qbc_node in nodes:
         node_addr = parse_localhost(qbc_node)
-        quant_payload = {'quant': pickle.dumps(quant)}
-        request = requests.post("{}/add-block".format(node_addr), json=quant_payload)
-        print("Broadcasted new block to {} - {}".format(node_addr, request.text))
+        if node_addr != this_node:
+            print node_addr
+            quant_payload = {'quant': pickle.dumps(quant)}
+            request = requests.post("{}/add-block".format(node_addr), json=quant_payload)
+            print("Broadcasted new block to {} - {}".format(node_addr, request.text))
 
 
 def discover_network(genesis_node, live_nodes=[], port=5000):
@@ -43,8 +49,7 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
     max_length = 0
     max_length_node = ""
     if not genesis_node:
-        node_ip = socket.gethostbyname(socket.gethostname())
-        this_node = "http://{}:{}".format(node_ip, port)
+        this_node = get_this_node(port)
         for qbc_node in registered_nodes:
             node_addr = parse_localhost(qbc_node)
             # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var

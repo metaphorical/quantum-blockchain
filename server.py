@@ -5,7 +5,7 @@ from flask import Flask, request
 import hashlib as hasher
 
 from modules.chain import Chain
-from modules.network import discover_network
+from modules.network import discover_network, broadcast_quant
 from modules.transactions import broadcast_transaction
 
 system_config = json.load(open('./config/system_preferences.json'))
@@ -45,10 +45,14 @@ def generate_block():
 	  	# Below is super simple, the idea is to have decision model on number of transactions and 
 		# also which transactions go in
 		global waiting_transactions
+		global live_nodes
+		global port
+		print "Starting leap"
 		new_quant_data = waiting_transactions
 		waiting_transactions = []
-		new_block = QBC.create_quant(new_quant_data)
-		#TODO: use network.broadcast_quant here
+		new_quant = QBC.create_quant(new_quant_data)
+		print new_quant
+		broadcast_quant(live_nodes, new_quant, port)
 		print "Quantum leap"	
 		return "block creation successful\n"
 
