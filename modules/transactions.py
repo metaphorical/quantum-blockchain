@@ -1,9 +1,10 @@
-import requests, json, socket
+import requests, json
 
-from modules.qbc_utils import parse_localhost
+from modules.qbc_utils import parse_localhost, get_current_ip, get_port
 
 def broadcast_transaction(nodes, transaction, port):
-    node_ip = socket.gethostbyname(socket.gethostname())
+    node_ip = get_current_ip()
+    port = get_port()
     this_node = parse_localhost("http://{}:{}".format(node_ip, port))
     for node in nodes:
         node = parse_localhost(node)

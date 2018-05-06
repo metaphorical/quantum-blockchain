@@ -7,6 +7,7 @@ import hashlib as hasher
 from modules.chain import Chain
 from modules.network import discover_network, broadcast_quant
 from modules.transactions import broadcast_transaction
+from modules.qbc_utils import get_port, is_genesis_node
 
 system_config = json.load(open('./config/system_preferences.json'))
 
@@ -15,7 +16,7 @@ node = Flask(__name__)
 
 live_nodes = system_config["genesis_nodes"]
 waiting_transactions = []
-port = int(sys.argv[1]) if (len(sys.argv) >= 2) else 5000
+port = get_port()
 
 @node.route('/inject', methods=['POST', 'PUT'])
 # Route to inject transaction (put in waiting queue)
@@ -52,7 +53,7 @@ def generate_block():
 		waiting_transactions = []
 		new_quant = QBC.create_quant(new_quant_data)
 		print new_quant
-		broadcast_quant(live_nodes, new_quant, port)
+		broadcast_quant(live_nodes, new_quant)
 		print "Quantum leap"	
 		return "block creation successful\n"
 
@@ -100,10 +101,9 @@ def register_node():
 
 # TODO: make deteriming genesis node proper - currently, first node is detected by looking at port (if it is 5000 it is base node) - better way is ot look into config and comparing within network module, thus shielding from implementation.
 # Discover full network and register on each of the nodes
-network=discover_network(port==5000,live_nodes=live_nodes, port=port)
+network=discover_network(live_nodes=live_nodes)
 live_nodes=network["registered_nodes"]
-
-if port!=5000 and json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+if not is_genesis_node() and json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
 	QBC.get_remote_node_chain(network["longest_chain_node"])
 
 

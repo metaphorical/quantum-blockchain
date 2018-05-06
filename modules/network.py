@@ -1,12 +1,12 @@
-import socket, json, requests, pickle
+import json, requests, pickle
 
-from modules.qbc_utils import parse_localhost
+from modules.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
 # TODO: review ip fetching, must be less hacky way
-def get_this_node(port=5000):
-    node_ip = socket.gethostbyname(socket.gethostname())
-    return "http://{}:{}".format(node_ip, port)
+def get_this_node():
+    node_ip = get_current_ip()
+    return "http://{}:{}".format(node_ip, get_port())
 
 def register_and_discover(node_addr, this_node):
     discover_payload = {'host': this_node}
@@ -22,12 +22,12 @@ def read_chain(node_addr):
     chain_request = requests.get("{}/chain".format(node_addr))
     return chain_request.text
 
-def broadcast_quant(nodes, quant, this_node_port=5000):
+def broadcast_quant(nodes, quant):
     """
         Broadcast any quant to all nodes in provided list
         TODO: secure this process
     """
-    this_node = parse_localhost(get_this_node(this_node_port))
+    this_node = parse_localhost(get_this_node())
     for qbc_node in nodes:
         node_addr = parse_localhost(qbc_node)
         if node_addr != this_node:
@@ -37,7 +37,7 @@ def broadcast_quant(nodes, quant, this_node_port=5000):
             print("Broadcasted new block to {} - {}".format(node_addr, request.text))
 
 
-def discover_network(genesis_node, live_nodes=[], port=5000):
+def discover_network(live_nodes=[]):
     """
         Network discovery is done in two stages:
         1 - ping genesys node (aka tracker) to register and get it's full list of nodes
@@ -48,8 +48,8 @@ def discover_network(genesis_node, live_nodes=[], port=5000):
     new_nodes = []
     max_length = 0
     max_length_node = ""
-    if not genesis_node:
-        this_node = get_this_node(port)
+    if not is_genesis_node():
+        this_node = get_this_node()
         for qbc_node in registered_nodes:
             node_addr = parse_localhost(qbc_node)
             # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var
