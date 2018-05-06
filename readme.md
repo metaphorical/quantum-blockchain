@@ -40,7 +40,7 @@ docker run -it -p 5000:5000 qbc
 * Get chain stats
 * Persist blockchain on disc
 * Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain, or keeping current if longest or same length
-* [TODO] Broadcast new block to all nodes
+* Broadcast new block to all nodes
 * [TODO] Check new block on all nodes (chain length check + all other checks)
 * [TODO] Make chain stats for comparison (configurable/parametrized) (POW)
 * [TODO] Network auth system
