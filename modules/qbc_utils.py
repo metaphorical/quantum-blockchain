@@ -20,7 +20,15 @@ def parse_localhost(new_node):
         node_addr = new_node.replace(current_node_ip, "localhost")
     return node_addr
 
+def get_hostname(ip, port):
+    # TODO: handle different protocols
+    return "http://{}:{}".format(ip, port)
+
 def is_genesis_node():
-    # TODO: not by port but by full genesis nodes list lookup
-    port = get_port()
-    return port==5000
+    """
+        Shows if current node belongs to list of initial nodes 
+        (it usually mean that those will stay longest time - i.e. forever)
+    """
+    genesis_nodes = system_config["genesis_nodes"]
+    this_node = get_hostname(get_current_ip(), get_port())
+    return this_node in genesis_nodes or parse_localhost(this_node) in genesis_nodes

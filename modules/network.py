@@ -1,12 +1,11 @@
 import json, requests, pickle
 
-from modules.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip
+from modules.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip, get_hostname
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
-# TODO: review ip fetching, must be less hacky way
 def get_this_node():
     node_ip = get_current_ip()
-    return "http://{}:{}".format(node_ip, get_port())
+    return get_hostname(node_ip, get_port())
 
 def register_and_discover(node_addr, this_node):
     discover_payload = {'host': this_node}

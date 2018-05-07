@@ -99,7 +99,6 @@ def register_node():
 				"stats": json.loads(QBC.get_chain_stats())
 			})
 
-# TODO: make deteriming genesis node proper - currently, first node is detected by looking at port (if it is 5000 it is base node) - better way is ot look into config and comparing within network module, thus shielding from implementation.
 # Discover full network and register on each of the nodes
 network=discover_network(live_nodes=live_nodes)
 live_nodes=network["registered_nodes"]
