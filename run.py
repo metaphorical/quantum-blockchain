@@ -4,10 +4,10 @@ from flask import Flask, request
 
 import hashlib as hasher
 
-from modules.chain import Chain
-from modules.network import discover_network, broadcast_quant
-from modules.transactions import broadcast_transaction
-from modules.qbc_utils import get_port, is_genesis_node
+from lib.chain import Chain
+from lib.network import discover_network, broadcast_quant
+from lib.transactions import broadcast_transaction
+from lib.qbc_utils import get_port, is_genesis_node
 
 system_config = json.load(open('./config/system_preferences.json'))
 

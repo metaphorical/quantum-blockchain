@@ -2,8 +2,8 @@ import datetime as date
 import json, pickle, os
 import hashlib as hasher
 
-from modules.quant import Quant
-from modules.network import read_chain
+from lib.quant import Quant
+from lib.network import read_chain
 
 class Chain:
     """

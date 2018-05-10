@@ -16,7 +16,7 @@ Install dependencies from requirements.txt
 Start server by running
 
 ```
-python server.py
+python run.py
 ```
 ### Running it using Docker - basic
 ```

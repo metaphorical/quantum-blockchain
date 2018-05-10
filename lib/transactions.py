@@ -1,6 +1,6 @@
 import requests, json
 
-from modules.qbc_utils import parse_localhost, get_current_ip, get_port, get_hostname
+from lib.qbc_utils import parse_localhost, get_current_ip, get_port, get_hostname
 
 def broadcast_transaction(nodes, transaction, port):
     node_ip = get_current_ip()

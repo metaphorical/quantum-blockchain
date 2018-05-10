@@ -1,5 +1,5 @@
-from modules.hash import hash_block
-from modules.proof import proof
+from lib.hash import hash_block
+from lib.proof import proof
 
 class Quant:
   """
