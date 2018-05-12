@@ -16,6 +16,7 @@ class Chain:
             self.qbc = Chain.__read_chain_from_disc()
         else:
             self.qbc = [Chain.__bang()]
+            self.save()
         self.current_quant = self.qbc[0]
 
     @classmethod
@@ -53,7 +54,7 @@ class Chain:
         new_quant = Chain.__create_next_quant(self.current_quant, data)
         self.qbc.append(new_quant)
         self.current_quant = self.qbc[len(self.qbc) - 1]
-        Chain.write_qbc_to_disc(self)
+        Chain.save(self)
         return new_quant
     
     def add_quant(self, quant):
@@ -62,7 +63,7 @@ class Chain:
         """
         self.qbc.append(quant)
         self.current_quant = self.qbc[len(self.qbc) - 1]
-        Chain.write_qbc_to_disc(self)
+        Chain.save(self)
 
     def get_chain(self, format="default"):
         return {
@@ -76,13 +77,15 @@ class Chain:
             "serialized": pickle.dumps(self.qbc)
         }.get(format, self.qbc)
 
-    def write_qbc_to_disc(self):
+    def save(self):
         """
             Storing QBC on disc serualized using pickle
             TODO: introduce encryption
         """
         with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'wb') as fp:
             pickle.dump(self.qbc, fp)
+    def load(self):
+        self.qbc = self.__read_chain_from_disc()
 
     def get_remote_node_chain(self, host):
         """

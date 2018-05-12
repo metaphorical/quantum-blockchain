@@ -1,7 +1,8 @@
-import requests, json
+import os, requests, json
 
 from lib.qbc_utils import parse_localhost, get_current_ip, get_port, get_hostname
 
+# TODO: 
 def broadcast_transaction(nodes, transaction, port):
     node_ip = get_current_ip()
     port = get_port()
@@ -11,3 +12,11 @@ def broadcast_transaction(nodes, transaction, port):
         if node != this_node:
             r = requests.put("{}/inject".format(node), json={"data":transaction})
             print(r.text)
+
+def load_transactions():
+    with open(os.path.join(os.getcwd(),'storage', 'transactions.json'), 'rb') as transactions_file:
+            return json.load(transactions_file)
+
+def save_transactions(transactions):  
+    with open(os.path.join(os.getcwd(),'storage', 'transactions.json'), 'wb') as fp:
+            json.dump(transactions, fp)  

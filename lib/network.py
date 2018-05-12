@@ -2,7 +2,17 @@ import json, requests, pickle
 
 from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip, get_hostname
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
+# TODO: Convert this blob to Class and load and save in constructor.
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
+
+def load_nodes():
+    with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'rb') as node_file:
+            return json.loads(node_file)
+
+def save_nodes(nodes):  
+    with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'wb') as fp:
+            json.dumps(nodes, fp)  
+
 def get_this_node():
     node_ip = get_current_ip()
     return get_hostname(node_ip, get_port())
@@ -34,6 +44,7 @@ def broadcast_quant(nodes, quant):
             quant_payload = {'quant': pickle.dumps(quant)}
             request = requests.post("{}/add-block".format(node_addr), json=quant_payload)
             print("Broadcasted new block to {} - {}".format(node_addr, request.text))
+
 
 
 def discover_network(live_nodes=[]):

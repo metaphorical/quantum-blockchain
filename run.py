@@ -9,70 +9,57 @@ from lib.network import discover_network, broadcast_quant
 from lib.qbc_utils import get_port, is_genesis_node
 
 from modules.transactions.controllers import construct_transaction_blueprint
+from modules.mining.controllers import construct_mining_blueprint
 
 system_config = json.load(open('./config/system_preferences.json'))
 
-QBC = Chain()
 node = Flask(__name__)
 
+QBC = Chain()
 live_nodes = system_config["genesis_nodes"]
-waiting_transactions = []
 port = get_port()
 
 # Registering all the modules using blueprints
 # TODO leap (mine), chain, stats, add-block, dscover
-node.register_blueprint(construct_transaction_blueprint(live_nodes, waiting_transactions))
+node.register_blueprint(construct_transaction_blueprint(live_nodes, port))
 
-@node.route('/leap', methods=['GET'])
-# Route to trigger ad hoc mining
-# TODO: make mining configurable and automathic so POS and DPOS can be implemented
-def generate_block():
-  	if request.method == 'GET':
-	  	# Below is super simple, the idea is to have decision model on number of transactions and 
-		# also which transactions go in
-		global waiting_transactions
-		global live_nodes
-		global port
-		print "Starting leap"
-		new_quant_data = waiting_transactions
-		waiting_transactions = []
-		new_quant = QBC.create_quant(new_quant_data)
-		print new_quant
-		broadcast_quant(live_nodes, new_quant)
-		print "Quantum leap"	
-		return "block creation successful\n"
+node.register_blueprint(construct_mining_blueprint(live_nodes, port))
 
 @node.route('/json-chain', methods=['GET'])
 # Route to get chain in JSON format
 def serve_json_qbc():
+	QBC = Chain()
 	if request.method == 'GET':
 		return QBC.get_chain("json")
 
 @node.route('/chain', methods=['GET'])
 # Route to get chain in Pickel format
 def serve_qbc():
+	QBC = Chain()
 	if request.method == 'GET':
 		return QBC.get_chain("serialized")
 
 @node.route('/stats', methods=['GET'])
 # Route to get Node stats
 def chain_stats():
-		return QBC.get_chain_stats()
+	QBC = Chain()
+	return QBC.get_chain_stats()
 
 @node.route('/add-block', methods=['POST'])
 # Route to simply submit new, just mined block to this node
 def add_block():
-		if request.method == 'POST':
-			new_quant_pickle = request.get_json()['quant']
-			new_quant = pickle.loads(new_quant_pickle)
-			QBC.add_quant(new_quant)
-			# TODO: better detection if it succided
-			return "Success"
+	QBC = Chain()
+	if request.method == 'POST':
+		new_quant_pickle = request.get_json()['quant']
+		new_quant = pickle.loads(new_quant_pickle)
+		QBC.add_quant(new_quant)
+		# TODO: better detection if it succided
+		return "Success"
 
 @node.route('/discover', methods=['POST', 'GET'])
 # Register new node if not already registered
 def register_node():
-	global live_nodes
+	QBC = Chain()
 	if request.method == 'GET':
 		return json.dumps(live_nodes)
 	if request.method == 'POST':
