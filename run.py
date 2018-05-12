@@ -5,25 +5,24 @@ from flask import Flask, request
 import hashlib as hasher
 
 from lib.chain import Chain
-from lib.network import discover_network, broadcast_quant
+from lib.network import discover_network, broadcast_quant, load_nodes, save_nodes
 from lib.qbc_utils import get_port, is_genesis_node
 
-from modules.transactions.controllers import construct_transaction_blueprint
-from modules.mining.controllers import construct_mining_blueprint
+from modules.transactions.controllers import transactions_blueprint
+from modules.mining.controllers import mining_blueprint
 
 system_config = json.load(open('./config/system_preferences.json'))
 
 node = Flask(__name__)
 
 QBC = Chain()
-live_nodes = system_config["genesis_nodes"]
 port = get_port()
 
 # Registering all the modules using blueprints
 # TODO leap (mine), chain, stats, add-block, dscover
-node.register_blueprint(construct_transaction_blueprint(live_nodes, port))
+node.register_blueprint(transactions_blueprint)
 
-node.register_blueprint(construct_mining_blueprint(live_nodes, port))
+node.register_blueprint(mining_blueprint)
 
 @node.route('/json-chain', methods=['GET'])
 # Route to get chain in JSON format
@@ -59,6 +58,7 @@ def add_block():
 @node.route('/discover', methods=['POST', 'GET'])
 # Register new node if not already registered
 def register_node():
+	live_nodes = load_nodes()
 	QBC = Chain()
 	if request.method == 'GET':
 		return json.dumps(live_nodes)
@@ -66,15 +66,18 @@ def register_node():
 		new_host = request.get_json()['host']
 		if not (new_host in live_nodes):
 			live_nodes.append(new_host)
+			save_nodes(live_nodes)
 		return json.dumps({
 				"live_nodes": live_nodes,
 				"stats": json.loads(QBC.get_chain_stats())
 			})
 
 # Discover full network and register on each of the nodes
-network=discover_network(live_nodes=live_nodes)
+network=discover_network()
 live_nodes=network["registered_nodes"]
+
 if not is_genesis_node() and json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+	save_nodes(live_nodes)
 	QBC.get_remote_node_chain(network["longest_chain_node"])
 
 

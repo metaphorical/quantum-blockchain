@@ -1,4 +1,4 @@
-import json, requests, pickle
+import os, json, requests, pickle
 
 from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip, get_hostname
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
@@ -7,7 +7,7 @@ from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_curren
 
 def load_nodes():
     with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'rb') as node_file:
-            return json.loads(node_file)
+            return json.load(node_file)
 
 def save_nodes(nodes):  
     with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'wb') as fp:
@@ -54,7 +54,7 @@ def discover_network(live_nodes=[]):
         2 - register on all of the nodes
         TODO: implement cross check and re register of nodes.
     """
-    registered_nodes = live_nodes
+    registered_nodes = load_nodes()
     new_nodes = []
     max_length = 0
     max_length_node = ""
