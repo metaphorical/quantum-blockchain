@@ -10,6 +10,7 @@ from lib.qbc_utils import get_port, is_genesis_node
 
 from modules.transactions.controllers import transactions_blueprint
 from modules.mining.controllers import mining_blueprint
+from modules.network.controllers import network_blueprint
 
 system_config = json.load(open('./config/system_preferences.json'))
 
@@ -19,10 +20,12 @@ QBC = Chain()
 port = get_port()
 
 # Registering all the modules using blueprints
-# TODO leap (mine), chain, stats, add-block, dscover
+# TODO leap (mine), chain, stats, add-block
 node.register_blueprint(transactions_blueprint)
 
 node.register_blueprint(mining_blueprint)
+
+node.register_blueprint(network_blueprint)
 
 @node.route('/json-chain', methods=['GET'])
 # Route to get chain in JSON format
@@ -54,23 +57,6 @@ def add_block():
 		QBC.add_quant(new_quant)
 		# TODO: better detection if it succided
 		return "Success"
-
-@node.route('/discover', methods=['POST', 'GET'])
-# Register new node if not already registered
-def register_node():
-	live_nodes = load_nodes()
-	QBC = Chain()
-	if request.method == 'GET':
-		return json.dumps(live_nodes)
-	if request.method == 'POST':
-		new_host = request.get_json()['host']
-		if not (new_host in live_nodes):
-			live_nodes.append(new_host)
-			save_nodes(live_nodes)
-		return json.dumps({
-				"live_nodes": live_nodes,
-				"stats": json.loads(QBC.get_chain_stats())
-			})
 
 # Discover full network and register on each of the nodes
 network=discover_network()

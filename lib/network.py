@@ -7,11 +7,14 @@ from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_curren
 
 def load_nodes():
     with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'rb') as node_file:
-            return json.load(node_file)
+        nodes_json = json.load(node_file)
+        print("NODES {}".format(nodes_json))
+        return nodes_json
 
 def save_nodes(nodes):  
+    # import pdb; pdb.set_trace()
     with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'wb') as fp:
-            json.dumps(nodes, fp)  
+        json.dump(nodes, fp)  
 
 def get_this_node():
     node_ip = get_current_ip()
@@ -60,6 +63,7 @@ def discover_network(live_nodes=[]):
     max_length_node = ""
     if not is_genesis_node():
         this_node = get_this_node()
+        print("THIS NODE {}".format(this_node))
         for qbc_node in registered_nodes:
             node_addr = parse_localhost(qbc_node)
             # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var
