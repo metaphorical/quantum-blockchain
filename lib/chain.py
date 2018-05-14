@@ -97,3 +97,4 @@ class Chain:
         """
         remote_chain = read_chain(host)
         self.qbc = pickle.loads(remote_chain)
+        self.save()
