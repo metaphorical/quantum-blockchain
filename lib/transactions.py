@@ -2,7 +2,8 @@ import os, requests, json
 
 from lib.qbc_utils import parse_localhost, get_current_ip, get_port, get_hostname
 
-# TODO: 
+# TODO: All the saves and loads should be improved by adding in memory storage for performance and encryption for security
+
 def broadcast_transaction(nodes, transaction, port):
     node_ip = get_current_ip()
     port = get_port()

@@ -5,6 +5,8 @@ import hashlib as hasher
 from lib.quant import Quant
 from lib.network import read_chain
 
+# TODO: All the saves and loads should be improved by adding in memory storage for performance and encryption for security
+
 class Chain:
     """
     QBC structure implementation

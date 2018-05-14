@@ -4,6 +4,7 @@ from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_curren
 # registering on the network, currently no channel to broadcast, so we can use ping to everyone in genesis nodes list
 # TODO: Convert this blob to Class and load and save in constructor.
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
+# TODO: All the saves and loads should be improved by adding in memory storage for performance and encryption for security
 
 def load_nodes():
     with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'rb') as node_file:
