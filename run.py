@@ -1,19 +1,15 @@
-import json, sys, requests, pickle
+import json
 
-from flask import Flask, request
-
-import hashlib as hasher
+from flask import Flask
 
 from lib.chain import Chain
-from lib.network import discover_network, broadcast_quant, load_nodes, save_nodes
+from lib.network import discover_network, save_nodes
 from lib.qbc_utils import get_port, is_genesis_node
 
 from modules.transactions.controllers import transactions_blueprint
 from modules.mining.controllers import mining_blueprint
 from modules.network.controllers import network_blueprint
 from modules.chain.controllers import chain_blueprint
-
-system_config = json.load(open('./config/system_preferences.json'))
 
 node = Flask(__name__)
 
@@ -34,9 +30,13 @@ node.register_blueprint(chain_blueprint)
 network=discover_network()
 live_nodes=network["registered_nodes"]
 
-if not is_genesis_node() and json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+if not is_genesis_node():
 	save_nodes(live_nodes)
-	QBC.get_remote_node_chain(network["longest_chain_node"])
+
+	# If this is not first (genesis) node (meaning that at start there is noone else to look at on start), 
+	# take look at network stats to see if there is longer chain. If there is one - get it.
+	if json.loads(QBC.get_chain_stats())["length"] < network["longest_chain_length"]:
+		QBC.get_remote_node_chain(network["longest_chain_node"])
 
 
 node.run(host='0.0.0.0', port=port, debug=True)
