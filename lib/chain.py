@@ -3,9 +3,10 @@ import json, pickle, os
 import hashlib as hasher
 
 from lib.quant import Quant
-from lib.network import read_chain
+from lib.network import Network
 
 # TODO: All the saves and loads should be improved by adding in memory storage for performance and encryption for security
+QBCN = Network()
 
 class Chain:
     """
@@ -97,6 +98,6 @@ class Chain:
             and preset for 2 or 3 node testing setup to emulate different lengths 
             and chain diverging events.
         """
-        remote_chain = read_chain(host)
+        remote_chain = QBCN.read_chain(host)
         self.qbc = pickle.loads(remote_chain)
         self.save()
