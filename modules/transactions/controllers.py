@@ -1,19 +1,20 @@
 from flask import Blueprint, request
 
 from lib.transactions import Transactions
-from lib.qbc_utils import get_port
+from lib.qbc_utils import QbcUtils
 from lib.network import Network
 
 transactions_blueprint = Blueprint('transactions', __name__)
 QBCN = Network()
 QBCT = Transactions()
+QBCU = QbcUtils()
 
 @transactions_blueprint.route('/inject', methods=['POST', 'PUT'])
 # Route to inject transaction (put in waiting queue)
 def add_transaction():
     waiting_transactions = QBCT.load_transactions()
     live_nodes = QBCN.load_nodes()
-    port = get_port()
+    port = QBCU.get_port()
     # add transaction to waiting list
     if request.method == 'POST':
         waiting_transactions.append(request.get_json()['data'])

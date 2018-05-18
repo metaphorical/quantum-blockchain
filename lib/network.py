@@ -1,6 +1,8 @@
 import os, json, requests, pickle
 
-from lib.qbc_utils import parse_localhost, is_genesis_node, get_port, get_current_ip, get_hostname
+from lib.qbc_utils import QbcUtils
+
+QBCU = QbcUtils()
 
 # TODO: implement timeout for request and fallback... Probably hardcoded genesis node should be fallback and some (maybe serverless?) discovery mechanism should be created
 # TODO: All the saves and loads should be improved by adding in memory storage for performance and encryption for security
@@ -12,14 +14,14 @@ class Network:
             print("NODES {}".format(nodes_json))
             return nodes_json
 
-    def save_nodes(self, nodes):  
+    def save_nodes(self, nodes):
         # import pdb; pdb.set_trace()
         with open(os.path.join(os.getcwd(),'storage', 'nodes.json'), 'wb') as fp:
-            json.dump(nodes, fp)  
+            json.dump(nodes, fp)
 
     def get_this_node(self):
-        node_ip = get_current_ip()
-        return get_hostname(node_ip, get_port())
+        node_ip = QBCU.get_current_ip()
+        return QBCU.get_hostname(node_ip, QBCU.get_port())
 
     def register_and_discover(self, node_addr, this_node):
         discover_payload = {'host': this_node}
@@ -29,7 +31,7 @@ class Network:
 
     def read_chain(self, node_addr):
         """
-            TODO: this might probably grow to be first secure transfer point, so when working on 
+            TODO: this might probably grow to be first secure transfer point, so when working on
             node to node auth, include it here
         """
         chain_request = requests.get("{}/chain".format(node_addr))
@@ -40,9 +42,9 @@ class Network:
             Broadcast any quant to all nodes in provided list
             TODO: secure this process
         """
-        this_node = parse_localhost(self.get_this_node())
+        this_node = QBCU.parse_localhost(self.get_this_node())
         for qbc_node in nodes:
-            node_addr = parse_localhost(qbc_node)
+            node_addr = QBCU.parse_localhost(qbc_node)
             if node_addr != this_node:
                 print node_addr
                 quant_payload = {'quant': pickle.dumps(quant)}
@@ -60,14 +62,14 @@ class Network:
         new_nodes = []
         max_length = 0
         max_length_node = ""
-        if not is_genesis_node():
+        if not QBCU.is_genesis_node():
             this_node = self.get_this_node()
             print("THIS NODE {}".format(this_node))
             for qbc_node in registered_nodes:
                 # When node boots up again it will have self on the node list
                 # We need to make sure that it does not try to call self in discovery process
                 if qbc_node != self.get_this_node():
-                    node_addr = parse_localhost(qbc_node)
+                    node_addr = QBCU.parse_localhost(qbc_node)
                     # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var
                     node_chain_length = json.loads(self.register_and_discover(node_addr, this_node).text)["stats"]["length"]
                     if(node_chain_length > max_length):
@@ -84,7 +86,7 @@ class Network:
                     if(len(new_nodes) > 0):
                         print("registered nodes - {}".format(json.dumps(registered_nodes)))
                         for new_node in new_nodes:
-                            new_node_addr = parse_localhost(new_node)
+                            new_node_addr = QBCU.parse_localhost(new_node)
                             self.register_and_discover(new_node_addr, this_node)
                     else:
                         print("I guess this is second node on the network...")
