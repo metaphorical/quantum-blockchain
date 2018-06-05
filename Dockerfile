@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "python", "./server.py" ]
+CMD [ "python", "./run.py" ]
