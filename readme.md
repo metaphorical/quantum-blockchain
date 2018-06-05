@@ -6,6 +6,27 @@
 
 Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains. Build it as general purose solution that can be used as a service in multiservice system to provide blockchain functionality.
 
+## Documentation
+
+* [Whitepaper](documentation/whitepaper.md)
+* [Blockchain Digest](documentation/blockchain-digest.md)
+
+## How to contribute
+
+You can fork this repo and work on it. When you create pull requests, I will make sure to review it and merge it as soon as possible.
+
+**If this ever picks up as proper project, I want to give control over it ot group of people so it makes senese to contribute and work on it.
+
+More detailed documentation about contributing and rules will come later, but you can review whitepaper, outline of planed features etc, and you can also review trello board:
+
+[QBC trello](https://trello.com/b/IKDDvvC1/quantum-blockchain)
+
+If you want to contribute, by either idea or doing some work in code (there is a need for lots of that), please ping me at rastko.vukasinovic@gmail.com so we can discuss and I can add you to board so we ca collect all the ideas and proposals and track any work.
+
+Thanks you!
+
+Read following part of docs for a way to run QBC and quickly start working on it.
+
 ## QBC Node server
 
 > **NOTE:** At this moment, for dev purposes, flask server will be running in debug mode.
@@ -23,11 +44,6 @@ python run.py
 docker build -t qbc .
 docker run -it -p 5000:5000 qbc
 ```
-
-## Documentation
-
-* [Whitepaper](documentation/whitepaper.md)
-* [Blockchain Digest](documentation/blockchain-digest.md)
 
 ### List of basic features
 
