@@ -4,3 +4,14 @@ services:
     build: .
     ports:
      - "5000:5000"
+    command: [ "python", "./run.py" ]
+  node2:
+    build: .
+    ports:
+     - "3000:3000"
+    command: [ "python", "./run.py", "3000" ]
+  node3:
+    build: .
+    ports:
+     - "4000:4000"
+    command: [ "python", "./run.py", "4000" ]
