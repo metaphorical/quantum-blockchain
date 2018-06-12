@@ -1,17 +1,34 @@
-version: '3'
+version: '2.1'
 services:
   node1:
     build: .
     ports:
      - "5000:5000"
     command: [ "python", "./run.py" ]
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
   node2:
     build: .
     ports:
      - "3000:3000"
     command: [ "python", "./run.py", "3000" ]
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.11
   node3:
     build: .
     ports:
      - "4000:4000"
     command: [ "python", "./run.py", "4000" ]
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.12
+    
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
