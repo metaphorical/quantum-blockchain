@@ -13,7 +13,7 @@ class Chain:
     QBC structure implementation
     """
     def __init__(self):
-        # If there is locally storred chain it should be read and used on init 
+        # If there is locally storred chain it should be read and used on init
         # (instead of basic initiation of genesis block)
         if(os.path.exists(os.path.join(os.getcwd(),'storage', 'q.bc'))):
             self.qbc = Chain.__read_chain_from_disc()
@@ -49,7 +49,7 @@ class Chain:
                 "length": len(self.get_chain()),
                 "hash": sha.hexdigest()
                 })
-    
+
     def create_quant(self, data):
         """
             Public method to add new quatn to QBC
@@ -59,7 +59,7 @@ class Chain:
         self.current_quant = self.qbc[len(self.qbc) - 1]
         Chain.save(self)
         return new_quant
-    
+
     def add_quant(self, quant):
         """
             Add Quant to QBC
@@ -82,7 +82,7 @@ class Chain:
 
     def save(self):
         """
-            Storing QBC on disc serualized using pickle
+            Storing QBC on disc serialized using pickle
             TODO: introduce encryption
         """
         with open(os.path.join(os.getcwd(),'storage', 'q.bc'), 'wb') as fp:
@@ -93,9 +93,9 @@ class Chain:
     def get_remote_node_chain(self, host):
         """
             Downloads chain in bickle format and sets it into qbc
-            
+
             TODO: In order to develop and test I need to first finish dockerizing
-            and preset for 2 or 3 node testing setup to emulate different lengths 
+            and preset for 2 or 3 node testing setup to emulate different lengths
             and chain diverging events.
         """
         remote_chain = QBCN.read_chain(host)

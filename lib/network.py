@@ -83,6 +83,7 @@ class Network:
                     print("new nodes - {}".format(json.dumps(new_nodes)))
 
                     registered_nodes = registered_nodes + new_nodes
+                    self.save_nodes(registered_nodes)
                     if(len(new_nodes) > 0):
                         print("registered nodes - {}".format(json.dumps(registered_nodes)))
                         for new_node in new_nodes:
