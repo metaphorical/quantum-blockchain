@@ -1,6 +1,6 @@
 # Basic general purpose blockchain in Python
 
-> Purely building this to get the full scope of abilities and pitfalls of building general purpose blockchain. Would love it to grow to something useful but... 
+> Purely building this to get the full scope of abilities and pitfalls of building general purpose blockchain. Would love it to grow to something useful but...
 
 ## Idea (it will get analized in more depth in whitepaper)
 
@@ -52,7 +52,7 @@ docker run -it -p 5000:5000 qbc
 * Create a block
 * Get full chain for comparison
 * Basic node registration on the network
-* Basic node discovery and distributed registration 
+* Basic node discovery and distributed registration
 * Get chain stats
 * Persist blockchain on disc
 * Basic bootstrap of the node - when node boots up it reads from the disc and fetches chain stats from known nodes, getting longest chain, or keeping current if longest or same length
@@ -71,13 +71,13 @@ docker run -it -p 5000:5000 qbc
 * [TODO] Other auth / data lock methods
 
 ### Support features
-* [TODO] Admin UI 
+* [TODO] Admin UI
 * [TODO] Analytics dashboard
 
 
 ## Basic elements
 
-* **Quantum blockchain (QBC)** - this blockcahain 
+* **Quantum blockchain (QBC)** - this blockcahain
 * **Quant** - block in QBC
 * **Bang** - creation of new blockchain - genesis block.
 * **Transaction** - new data to be added to block
@@ -85,17 +85,19 @@ docker run -it -p 5000:5000 qbc
 
 ### Routes available
 
-* **/inject** 
+* **/inject**
   * [POST] add transaction to transaction pool (transactions waiting ti be added to db)
-* **/leap** 
+* **/leap**
   * [GET] add the data to blockchain - mine a block putting all the transactions in transaction pool in.
-* **/json-chain** 
+* **/json-chain**
   * [GET] get whole chain in the node in JSON format
-* **/chain** 
+* **/chain**
   * [GET] get whole chain in the node serialized in pickle
-* **/discover** 
+* **/discover**
   * [POST] register one node on the system by sending it node host addres like host=address
   * [GET] get currently up to date list of live nodes known to this node
+* **/stats**
+  * [GET] Get chain stats
 
 ### To test server while running
 
@@ -114,7 +116,7 @@ http -v GET localhost:5000/leap
 
 Get blockchain in JSON format:
 ```
-http -v GET localhost:5000/chain
+http -v GET localhost:5000/json-chain
 ```
 
 ## Used third party dependencies

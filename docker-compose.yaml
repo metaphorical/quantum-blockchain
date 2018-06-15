@@ -5,14 +5,26 @@ services:
     ports:
      - "5000:5000"
     command: [ "python", "./run.py" ]
+    volumes:
+    - ./test/test_storage/node1:/usr/src/app/storage
     networks:
       app_net:
         ipv4_address: 172.16.238.10
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://172.16.238.10:5000/stats"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
   node2:
     build: .
     ports:
      - "3000:3000"
     command: [ "python", "./run.py", "3000" ]
+    volumes:
+    - ./test/test_storage/node2:/usr/src/app/storage
+    depends_on:
+      node1:
+        condition: service_healthy
     networks:
       app_net:
         ipv4_address: 172.16.238.11
@@ -21,10 +33,15 @@ services:
     ports:
      - "4000:4000"
     command: [ "python", "./run.py", "4000" ]
+    volumes:
+    - ./test/test_storage/node3:/usr/src/app/storage
+    depends_on:
+      node1:
+        condition: service_healthy
     networks:
       app_net:
         ipv4_address: 172.16.238.12
-    
+
 networks:
   app_net:
     driver: bridge
