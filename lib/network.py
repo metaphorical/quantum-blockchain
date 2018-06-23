@@ -25,7 +25,11 @@ class Network:
 
     def register_and_discover(self, node_addr, this_node):
         discover_payload = {'host': this_node}
-        register_request = requests.post("{}/discover".format(node_addr), json=discover_payload)
+        try:
+            register_request = requests.post("{}/discover".format(node_addr), json=discover_payload)
+        except ValueError:
+            print("register and discover ERROR - {}".format(ValueError))
+            register_request = False
         print("register and discover - {}".format(register_request.text))
         return register_request
 
@@ -71,12 +75,22 @@ class Network:
                 if qbc_node != self.get_this_node():
                     node_addr = QBCU.parse_localhost(qbc_node)
                     # Reading chain stats and checking chain length, if chain length is higher we set it in max_length var
-                    node_chain_length = json.loads(self.register_and_discover(node_addr, this_node).text)["stats"]["length"]
+                    discover_node = self.register_and_discover(node_addr, this_node)
+                    
+                    # Before implementing retries, we assume that there is no node
+                    if discover_node:
+                        node_chain_length = json.loads(discover_node.text)["stats"]["length"]
+                    else:
+                        node_chain_length = 0
+
                     if(node_chain_length > max_length):
                         max_length = node_chain_length
                         max_length_node = node_addr
-                    # Getting live nodes and figuring out new ones
-                    hosts_from_node = json.loads(self.register_and_discover(node_addr, this_node).text)["live_nodes"]
+                    # Getting live nodes and figuring out new ones (no nodes if node not live)
+                    if discover_node:
+                        hosts_from_node = json.loads(discover_node.text)["live_nodes"]  
+                    else: 
+                        hosts_from_node = []
 
                     new_nodes += [x for x in hosts_from_node if (x != this_node and x not in registered_nodes)]
 
