@@ -55,6 +55,20 @@ docker build -t qbc .
 docker run -it -p 5000:5000 qbc
 ```
 
+### Node network testing setup
+
+In order to be able to test multi node network situation there is docker-compose setup provided for this case. To start it simply do:
+```
+docker-compose build
+docker-compose up
+```
+Setup is doing the following:
+* All three nodes will react toyour code changes
+* Internal app data is stored in **./test/test_storage/node\*** 
+* Logs are stored in **./test/test_storage/logs\***
+
+**NOTE:** please make sure to cleanup directories for storage persistance by just leaving main node in node list and removing everything else when you are running new clean test.
+
 ### List of basic features
 
 * Accept transactions
