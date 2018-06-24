@@ -6,7 +6,9 @@ services:
      - "5000:5000"
     command: [ "python", "./run.py" ]
     volumes:
+    - .:/usr/src/app
     - ./test/test_storage/node1:/usr/src/app/storage
+    - ./test/test_storage/logs1:/tmp/logs
     networks:
       app_net:
         ipv4_address: 172.16.238.10
@@ -21,7 +23,9 @@ services:
      - "3000:3000"
     command: [ "python", "./run.py", "3000" ]
     volumes:
+    - .:/usr/src/app
     - ./test/test_storage/node2:/usr/src/app/storage
+    - ./test/test_storage/logs2:/tmp/logs
     depends_on:
       node1:
         condition: service_healthy
@@ -34,7 +38,9 @@ services:
      - "4000:4000"
     command: [ "python", "./run.py", "4000" ]
     volumes:
+    - .:/usr/src/app
     - ./test/test_storage/node3:/usr/src/app/storage
+    - ./test/test_storage/logs3:/tmp/logs
     depends_on:
       node1:
         condition: service_healthy
