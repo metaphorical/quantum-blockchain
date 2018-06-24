@@ -1,10 +1,10 @@
 # Quantum blockchain (QBC) whitepaper - v 0.1 [WIP]
 
-Blockchain solution for everyday multi service application. 
+Blockchain solution for your everyday SOA/µS application. 
 
 ## Purpose
 
-Main purpose of QBC is to be as generelly useful to anyone wanting to remove single point of failure and strengten data security by having decentralized and secure database. Idealy, this solution should reduce throughput of the system as little as possible.
+Main purpose of QBC is to be as generelly useful to anyone wanting to remove single point of failure and strenghten data security by having decentralized and secure database. Idealy, this solution should reduce throughput of the system as little as possible.
 
 QBC is built with integration and decoupling possibilities in mind, with idea to provide nice APIs and multi variant configurable solution. 
 
@@ -12,7 +12,7 @@ QBC is built with integration and decoupling possibilities in mind, with idea to
 
 **In short:** It is general purpose database that is fully replicated across arbitrary number of nodes.
 
-For more detailed answer we got to look at long list of resources I prepared [here](). Just a glance at content of given document tells you that world is still figuring out what is blockchain and what exactly this new piece of tech is able to solve for us.
+For more detailed answer we got to look at long list of resources I prepared [here](blockchain-digest.md). Just a glance at content of given document tells you that world is still figuring out what is blockchain and what exactly this new piece of tech is able to solve for us.
 
 On the other hand, what is basic set of features general purpose blockchain should have?
 
@@ -38,7 +38,11 @@ General purpose blockchain should provide set of initial, selectable methods to 
 * **Pos** - Proof-of-stake algorithm
 * **DPoS** - Delegated proof-of-stake algorithm
 
-It should additionally provide a way to write and use new algorythm.
+It should additionally provide a way to write and use new algorythm (as a plugin, or being easily added by community).
+
+### It should offer content encryption out of the box
+
+It would be lovely if we can just add key to encrypt and then be and tehn define fields to be encrypted in particular chain.
 
 ### It should be easily deployable
 
@@ -46,10 +50,16 @@ It should additionally provide a way to write and use new algorythm.
 
 ### It should have some kind of admin UI
 
+Current plan is to have it built in ReactJS
+
 #### Basic administration
 
-[...]
+Adding users to dashboard, forking chains
 
 #### Basic analytics dashboard
 
-[...]
+Looking at usage, chain sizes, performance. Analizing performance impact of chain growth etc.
+
+### Nice to have
+
+* Custom code execution (aka "contracts" capability)

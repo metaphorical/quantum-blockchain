@@ -1,6 +1,6 @@
 # Basic general purpose blockchain in Python
 
-> Purely building this to get the full scope of abilities and pitfalls of building general purpose blockchain. Would love it to grow to something useful but...
+This project grew out of me building something to get the full scope of what is needed to build general purpose blockchain. Current idea is to try and evolve it to something that can seriously contribute to any microservice echosystem in need of safe, secure and distributed data storage.
 
 ## Idea (it will get analized in more depth in whitepaper)
 
@@ -11,7 +11,7 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 * [Whitepaper](documentation/whitepaper.md)
 * [Blockchain Digest](documentation/blockchain-digest.md)
 
-## How to contribute
+## How start contributing and future plans for a project
 
 You can fork this repo and work on it. When you create pull requests, I will make sure to review it and merge it as soon as possible.
 
@@ -23,7 +23,7 @@ More detailed documentation about contributing and rules will come later, but yo
 
 If you want to contribute, by either idea or doing some work in code (there is a need for lots of that), please ping me at rastko.vukasinovic@gmail.com so we can discuss and I can add you to board so we ca collect all the ideas and proposals and track any work.
 
-Thanks you!
+Thank you!
 
 Read following part of docs for a way to run QBC and quickly start working on it.
 
@@ -39,6 +39,16 @@ Start server by running
 ```
 python run.py
 ```
+This runs server at port **5000**
+
+If you want to run multiple instances you can add the port as the argument:
+
+```
+python run.py 3000
+```
+
+This wouldn't fully work since all teh instances look at same place on the disc and persist node network data and chain in the same file... this is not for tastinh networks of nodes - just for running it in different port if you want to do it without virtualization.
+
 ### Running it using Docker - basic
 ```
 docker build -t qbc .
