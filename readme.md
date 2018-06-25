@@ -93,6 +93,7 @@ Setup is doing the following:
 * [TODO] Strong validation system
 * [TODO] Zero knowledge proof access to data
 * [TODO] Other auth / data lock methods
+* [TODO] Denprmalization to SQL DB
 
 ### Support features
 * [TODO] Admin UI
