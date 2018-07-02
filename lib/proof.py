@@ -9,6 +9,13 @@ def proof_of_work(last_proof):
         theproof += 1
     return theproof
 
+def delegated_block_creation(last_proof):
+    """
+        This is no proof system since it just returns order number of block.
+        Private chain implementation is considered to be in place.
+    """
+    return last_proof + 1
+
 def proof(last_param):
     """
     Applies selected proof algorythm 
