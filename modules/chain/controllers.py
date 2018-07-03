@@ -3,6 +3,7 @@ import pickle
 from flask import Blueprint, request
 
 from lib.chain import Chain
+from proof import validate
 
 chain_blueprint = Blueprint('chain', __name__)
 
@@ -13,9 +14,13 @@ def add_block():
 	if request.method == 'POST':
 		new_quant_pickle = request.get_json()['quant']
 		new_quant = pickle.loads(new_quant_pickle)
-		QBC.add_quant(new_quant)
-		# TODO: better detection if it succided
-		return "Success"
+		# Step towards BFT system, checking every quant validity
+		if(validate(QBC.get_current_quant().proof, new_quant.proof)):
+			QBC.add_quant(new_quant)
+			# TODO: better detection if it succided
+			return "Success"
+		else:
+			return "Invalid new block received"
 
 @chain_blueprint.route('/json-chain', methods=['GET'])
 # Route to get chain in JSON format

@@ -9,6 +9,12 @@ def proof_of_work(last_proof):
         theproof += 1
     return theproof
 
+def validate_pow(last_proof, theproof):
+    """
+        Confirm that provided proof is actually the next block
+    """
+    return (theproof % 19 == 0 and theproof % int(last_proof) == 0)
+
 def delegated_block_creation(last_proof):
     """
         This is no proof system since it just returns order number of block.
@@ -21,11 +27,16 @@ def proof(last_param):
     Applies selected proof algorythm 
     Currently just uses Proof of work.
     TODO: Implement
+        * DBC - delegated block creation
         * POS - proof of stake
         * DPOS - delegated proof of stake
-        * PBFT - practical byzantine fault tolerance
         * POA - proof of authority
     TODO: Implement configurable proof model.
     """
     return proof_of_work(last_param)
   
+def validate(last_proof, proof):
+    """
+        Implement validation switching based on which consensus system is used
+    """
+    return validate_pow(last_proof, theproof)

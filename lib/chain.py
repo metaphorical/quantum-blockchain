@@ -67,6 +67,9 @@ class Chain:
         self.qbc.append(quant)
         self.current_quant = self.qbc[len(self.qbc) - 1]
         Chain.save(self)
+    
+    def get_current_quant(self):
+        return self.current_quant
 
     def get_chain(self, format="default"):
         return {
