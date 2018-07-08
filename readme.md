@@ -1,21 +1,22 @@
 # Basic general purpose blockchain in Python
 
-This project grew out of me building something to get the full scope of what is needed to build general purpose blockchain. Current idea is to try and evolve it to something that can seriously contribute to any microservice echosystem in need of safe, secure and distributed data storage.
+This project grew out of my experiment of building something to get the full scope of what is needed to build general purpose blockchain. Current idea is to try and evolve it to project that can create BC solution which can seriously contribute to any microservice echosystem in need of safe, secure and distributed data storage.
 
-## Idea (it will get analized in more depth in whitepaper)
+## Idea (look into Medium article for more in depth explanation)
 
 Build general purpose blockchain system that can maintain and fork multiple blockchains for different purposes and accept different data for different blockchains. Build it as general purose solution that can be used as a service in multiservice system to provide blockchain functionality.
 
 ## Documentation
 
-* [Whitepaper](documentation/whitepaper.md)
+* [Medium article (Whitepaper?)](documentation/whitepaper.md)
 * [Blockchain Digest](documentation/blockchain-digest.md)
+* [Architecture](documentation/architecture.md)
 
 ## How start contributing and future plans for a project
 
 You can fork this repo and work on it. When you create pull requests, I will make sure to review it and merge it as soon as possible.
 
-**If this ever picks up as proper project, I want to give control over it ot group of people so it makes senese to contribute and work on it.
+**If this ever picks up as proper project, I want to give control over it ot group of people so it makes senese to contribute and work on it.**
 
 More detailed documentation about contributing and rules will come later, but you can review whitepaper, outline of planed features etc, and you can also review trello board:
 
@@ -47,7 +48,7 @@ If you want to run multiple instances you can add the port as the argument:
 python run.py 3000
 ```
 
-This wouldn't fully work since all teh instances look at same place on the disc and persist node network data and chain in the same file... this is not for tastinh networks of nodes - just for running it in different port if you want to do it without virtualization.
+This wouldn't fully work since all the instances look at same place on the disc and persist node network data and chain in the same file... this is not for tastinh networks of nodes - just for running it in different port if you want to do it without virtualization.
 
 ### Running it using Docker - basic
 ```
@@ -93,7 +94,7 @@ Setup is doing the following:
 * [TODO] Strong validation system
 * [TODO] Zero knowledge proof access to data
 * [TODO] Other auth / data lock methods
-* [TODO] Denprmalization to SQL DB
+* [TODO] Denormalization to SQL DB / JSON
 
 ### Support features
 * [TODO] Admin UI

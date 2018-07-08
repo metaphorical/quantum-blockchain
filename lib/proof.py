@@ -35,7 +35,7 @@ def proof(last_param):
     """
     return proof_of_work(last_param)
   
-def validate(last_proof, proof):
+def validate(last_proof, theproof):
     """
         Implement validation switching based on which consensus system is used
     """

@@ -3,7 +3,7 @@ import pickle
 from flask import Blueprint, request
 
 from lib.chain import Chain
-from proof import validate
+from lib.proof import validate
 
 chain_blueprint = Blueprint('chain', __name__)
 
