@@ -8,7 +8,7 @@ Build general purpose blockchain system that can maintain and fork multiple bloc
 
 ## Documentation
 
-* [Medium article (Whitepaper?)](documentation/whitepaper.md)
+* [Medium article (Whitepaper?)](https://hackernoon.com/building-general-purpose-blockchain-71ffb8511ce)
 * [Blockchain Digest](documentation/blockchain-digest.md)
 * [Architecture](documentation/architecture.md)
 
@@ -65,7 +65,7 @@ docker-compose up
 ```
 Setup is doing the following:
 * All three nodes will react toyour code changes
-* Internal app data is stored in **./test/test_storage/node\*** 
+* Internal app data is stored in **./test/test_storage/node\***
 * Logs are stored in **./test/test_storage/logs\***
 
 **NOTE:** please make sure to cleanup directories for storage persistance by just leaving main node in node list and removing everything else when you are running new clean test.
