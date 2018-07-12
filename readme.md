@@ -1,4 +1,9 @@
-# Basic general purpose blockchain in Python
+
+
+# Quantum Blockchain (QBC)
+#### Basic general purpose blockchain in Python
+
+[![Known Vulnerabilities](https://snyk.io/test/github/metaphorical/quantum-blockchain/badge.svg)](https://snyk.io/test/github/metaphorical/quantum-blockchain)
 
 This project grew out of my experiment of building something to get the full scope of what is needed to build general purpose blockchain. Current idea is to try and evolve it to project that can create BC solution which can seriously contribute to any microservice echosystem in need of safe, secure and distributed data storage.
 
