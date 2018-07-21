@@ -1,0 +1,68 @@
+swagger: "2.0"
+info:
+  description: "Api definitions for Quantum blockchain"
+  version: "1.0.0"
+  title: "QBC Swagger"
+  termsOfService: "https://www.gnu.org/licenses/gpl-3.0.en.html"
+  contact:
+    email: "rastko.vukasinovic@gmail.com"
+  license:
+    name: "GPL 3.0"
+    url: "https://www.gnu.org/licenses/gpl-3.0.en.html"
+host: "localhost:5000"
+basePath: "/v1"
+tags:
+- name: "quantum blockchain"
+  description: "general purpose blockchain"
+  externalDocs:
+    description: "Find out more"
+    url: "https://github.com/metaphorical/quantum-blockchain"
+schemes:
+- "https"
+- "http"
+paths:
+  /inject:
+    post:
+      tags:
+      - "inject"
+      summary: "Add transaction to transaction pool"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Inject"
+      responses:
+        200:
+          description: "Successfully added to transaction pool"
+        405:
+          description: "Invalid input"
+    
+# securityDefinitions:
+#   petstore_auth:
+#     type: "oauth2"
+#     authorizationUrl: ".../oauth/dialog"
+#     flow: "implicit"
+#     scopes:
+#       write:pets: "modify pets in your account"
+#       read:pets: "read your pets"
+#   api_key:
+#     type: "apiKey"
+#     name: "api_key"
+#     in: "header"
+definitions:
+  Inject:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
