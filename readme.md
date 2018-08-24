@@ -1,5 +1,5 @@
 
-![quantum blockchain](./misc/logo.png "QBC") ![Known Vulnerabilities](https://snyk.io/test/github/metaphorical/quantum-blockchain/badge.svg)](https://snyk.io/test/github/metaphorical/quantum-blockchain)
+![quantum blockchain](./misc/logo.png "QBC") [![Known Vulnerabilities](https://snyk.io/test/github/metaphorical/quantum-blockchain/badge.svg)](https://snyk.io/test/github/metaphorical/quantum-blockchain)
 
 # Quantum Blockchain (QBC)
 #### Basic general purpose blockchain in Python
